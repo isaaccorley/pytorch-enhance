@@ -1,4 +1,5 @@
 *.pyc
 *.json
+dist/*
 data/*
 lightning_logs/*
