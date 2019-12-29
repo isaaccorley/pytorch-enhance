@@ -6,3 +6,5 @@ torch_enhance.egg-info/*
 .eggs/*
 data/*
 lightning_logs/*
+.vscode/*
+test.py
