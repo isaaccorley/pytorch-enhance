@@ -15,7 +15,7 @@ setup(
     name='torch_enhance',
     packages=['torch_enhance'],
     version=__version__,
-    license='Apache 2.0',
+    license='Apache License 2.0',
     description='Image Super-Resolution Library for PyTorch',
     author='Isaac Corley',
     author_email='isaac.corley@my.utsa.edu',
@@ -34,7 +34,6 @@ setup(
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',
     'Topic :: Software Development :: Build Tools',
-    'License :: OSI Approved :: Apache 2.0 License',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',

@@ -8,7 +8,7 @@ PyTorch Enhance provides a consolidated package of popular Image Super-Resolutio
 ## Installation
 
 ```
-pip install pytorch-enhance
+pip install torch-enhance
 ```
 
 

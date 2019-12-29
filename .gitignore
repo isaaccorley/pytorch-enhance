@@ -1,5 +1,8 @@
 *.pyc
 *.json
 dist/*
+build/*
+torch_enhance.egg-info/*
+.eggs/*
 data/*
 lightning_logs/*
