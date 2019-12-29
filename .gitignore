@@ -1,0 +1,4 @@
+*.pyc
+*.json
+data/*
+lightning_logs/*
