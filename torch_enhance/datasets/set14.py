@@ -27,14 +27,16 @@ class Set14(object):
 
         self.lr_transform = Compose(
             [
-                Resize(self.image_size // self.scale_factor, Image.BICUBIC),
+                Resize((self.image_size//self.scale_factor,
+                        self.image_size//self.scale_factor),
+                        Image.BICUBIC),
                 ToTensor(),
             ]
         )
 
         self.hr_transform = Compose(
             [
-                Resize(self.image_size, Image.BICUBIC),
+                Resize((self.image_size, self.image_size), Image.BICUBIC),
                 ToTensor(),
             ]
         )

@@ -35,11 +35,11 @@ class DatasetFolder(torch.utils.data.Dataset):
         ]
 
     def __getitem__(self, idx):
-        lr = load_img(self.file_names[idx])
+        lr = self.load_img(self.file_names[idx])
         hr = lr.copy()
         if self.lr_transform:
             lr = self.lr_transform(lr)
-        if self.target_transform:
+        if self.hr_transform:
             hr = self.hr_transform(hr)
 
         return lr, hr
@@ -47,7 +47,7 @@ class DatasetFolder(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.file_names)
 
-    def is_image_file(self, file_name):
+    def is_valid_file(self, file_name):
         return any(file_name.endswith(ext) for ext in self.extensions)
 
     def load_img(self, file_path):
