@@ -63,11 +63,6 @@ TODO
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](assets/Set5.gif)  |  ![](assets/Set14.gif)          | ![](assets/Historical.gif) 
 
-**T91**             |  **Historical**
-:-------------------------:|:-------------------------:
-![](assets/T91.gif)  |  ![](assets/Historical.gif)
-
-
 
 ## Metrics
 
