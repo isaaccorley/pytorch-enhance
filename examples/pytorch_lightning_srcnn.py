@@ -4,16 +4,17 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import pytorch_lightning as pl
 
-from torch_enhance.datasets import BSDS300
+from torch_enhance.datasets import BSDS300, Set5
 from torch_enhance.models import SRCNN
 
 
 class Enhance(pl.LightningModule):
-    def __init__(self, model, dataset, scale_factor):
+    def __init__(self, model, dataset, scale_factor, test_set=None):
         super(Enhance, self).__init__()
         self.model = model
         self.dataset = dataset
         self.scale_factor = scale_factor
+        self.test_set = test_set
         self.loss = self.model.loss
 
     def forward(self, x):
@@ -43,9 +44,17 @@ class Enhance(pl.LightningModule):
     def val_dataloader(self):
         return DataLoader(self.dataset.get_dataset(train=False), batch_size=2)
 
+    @pl.data_loader
+    def test_dataloader(self):
+        if self.test_set is None:
+            return DataLoader(self.dataset.get_dataset(train=False), batch_size=2)
+        else:
+            return DataLoader(self.test_set.get_dataset(), batch_size=1)
+
 
 scale_factor = 2
 data = BSDS300(scale_factor)
+test_set = Set5(scale_factor)
 model = SRCNN(scale_factor)
 module = Enhance(model, data, scale_factor)
 trainer = pl.Trainer()

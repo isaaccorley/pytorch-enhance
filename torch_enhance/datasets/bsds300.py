@@ -1,10 +1,9 @@
 import os
-import glob
-import urllib
-import tarfile
+import shutil
 from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
 
-from .common import DatasetFolder
+from .common import BSDS300_URL, DatasetFolder
+from .utils import download_and_extract_archive
 
 
 class BSDS300(object):
@@ -12,22 +11,19 @@ class BSDS300(object):
         self,
         scale_factor=2,
         image_size=256,
-        data_dir=None,
-        color_space="RGB"
+        data_dir=os.path.join(os.getcwd(), 'data'),
+        color_space='RGB'
     ):
         self.scale_factor = scale_factor
         self.image_size = image_size
-        self.data_dir = data_dir
+        self.root_dir = os.path.join(data_dir, 'BSDS300')
         self.color_space = color_space
-        self.extensions = ["jpg"]
-        self.url = "http://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/BSDS300-images.tgz"
-
-        if self.data_dir is None:
-            self.data_dir = os.path.join(os.getcwd(), "data")
+        self.extensions = ['.jpg']
+        self.url = BSDS300_URL
 
         self.crop_size = self.image_size - (self.image_size % self.scale_factor)
 
-        self.root_dir = self.download()
+        self.download(data_dir)
 
         self.input_transform = Compose(
             [
@@ -39,34 +35,27 @@ class BSDS300(object):
 
         self.target_transform = Compose([CenterCrop(self.crop_size), ToTensor()])
 
-    def download(self):
+    def download(self, data_dir):
 
-        output_dir = os.path.join(self.data_dir, "BSDS300/images")
-        
-        if not os.path.exists(self.data_dir):
-            os.makedirs(self.data_dir)
+        if not os.path.exists(data_dir):
+            os.mkdir(data_dir)
 
-        if not os.path.exists(output_dir):
-            print("downloading url ", self.url)
+        if not os.path.exists(self.root_dir):
+            os.makedirs(self.root_dir)
+            
+            download_and_extract_archive(self.url, data_dir, remove_finished=True)
 
-            data = urllib.request.urlopen(self.url)
-
-            file_path = os.path.join(self.data_dir, os.path.basename(self.url))
-            with open(file_path, "wb") as f:
-                f.write(data.read())
-
-            print("Extracting data")
-            with tarfile.open(file_path) as tar:
-                for item in tar:
-                    tar.extract(item, self.data_dir)
-
-            os.remove(file_path)
-
-            # Remove .txt files
-            for f in glob.glob('data/BSDS300/*.txt'):
-                os.remove(f)
-
-        return output_dir
+            # Tidy up
+            for d in ['train', 'test']:
+                shutil.move(src=os.path.join(self.root_dir, 'images', d), dst=self.root_dir)
+            
+            for f in os.listdir(self.root_dir):
+                if f not in ['train', 'test']:
+                    path = os.path.join(self.root_dir, f)
+                    if os.path.isdir(path):
+                        _ = shutil.rmtree(path)
+                    else:
+                        _ = os.remove(path)
 
     def get_dataset(self, train=True):
         root_dir = os.path.join(self.root_dir, "train" if train else "test")
