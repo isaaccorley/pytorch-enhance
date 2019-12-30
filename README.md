@@ -1,8 +1,8 @@
 # pytorch-enhance: Image Super-Resolution in PyTorch
-Library for modern Image Super-Resolution in PyTorch
+Library for Minimal Modern Image Super-Resolution in PyTorch
 
 --------------------------------------------------------------------------------
-PyTorch Enhance provides a consolidated package of popular Image Super-Resolution models, datasets, and metrics to allow for quick and painless benchmarking or pretrained models to quickly add to your application.
+PyTorch Enhance provides a consolidated package of popular Image Super-Resolution models, datasets, and metrics to allow for quick and painless benchmarking or for quickly adding pretrained models to your application.
 
 
 ## Installation
@@ -28,44 +28,20 @@ TODO
 * **Deep Image Prior** from Ulyanov et al. [Deep Image Prior](https://arxiv.org/pdf/1711.10925.pdf)
 
 
+## State-of-the-Art
+Not sure which models are currently the best? Check out the [PapersWithCode Image Super-Resolution Leaderboards](https://paperswithcode.com/task/image-super-resolution)
+
+
 ## Datasets
 The following benchmark datasets are available for usage:
 
 * **[BSDS300](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)**
-
-<p align="center">
-    <img src="assets/BSDS300.gif" width="256"\>
-</p>
-
 * **[BSDS500](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html)**
-
-<p align="center">
-    <img src="assets/BSDS500.gif" width="256"\>
-</p>
-
 * **[Set5](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-
-<p align="center">
-    <img src="assets/Set5.gif" width="256"\>
-</p>
-
 * **[Set14](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-
-<p align="center">
-    <img src="assets/Set14.gif" width="256"\>
-</p>
-
 * **[T91](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-
-<p align="center">
-    <img src="assets/T91.gif" width="256"\>
-</p>
-
 * **[Historical](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
 
-<p align="center">
-    <img src="assets/Historical.gif" width="256"\>
-</p>
 
 TODO
 
@@ -77,25 +53,38 @@ TODO
 * **[DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)**
 
 
+## Dataset Samples
+
+**BSDS300**                 |  **BSDS500**
+:-------------------------:|:-------------------------:
+![](assets/BSDS300.gif)  |  ![](assets/BSDS500.gif)
+
+**Set5**                    |  **Set14**
+:-------------------------:|:-------------------------:
+![](assets/Set5.gif)  |  ![](assets/Set14.gif)
+
+**T91**             |  **Historical**
+:-------------------------:|:-------------------------:
+![](assets/T91.gif)  |  ![](assets/Historical.gif)
+
+
+
 ## Metrics
 
-* Mean Squared Error (MSE)
-* Mean Absolute Error (MAE)
-* Peak-Signal-Noise-Ratio (PSNR)
+* **Mean Squared Error (MSE)**
+* **Mean Absolute Error (MAE)**
+* **Peak-Signal-Noise-Ratio (PSNR)**
 
 TODO
 
-* Structural Similarity Index (SSIM)
-* Universal Quality Index (UQI)
+* **Structural Similarity Index (SSIM)**
+* **Universal Quality Index (UQI)**
 
 
-## State-of-the-Art
-Not sure which models are currently the best? Check out the [PapersWithCode Image Super-Resolution Leaderboards](https://paperswithcode.com/task/image-super-resolution)
-
-
-## Running examples
+## Examples
 
 ```
 $ cd examples
-$ python pytorch_lightning_srcnn.py
 ```
+
+* **[Get up and benchmarking quickly with PyTorch Lightning](examples/pytorch_lightning_srcnn.py)**
