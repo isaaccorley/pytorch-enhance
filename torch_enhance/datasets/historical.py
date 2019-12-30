@@ -1,4 +1,5 @@
 import os
+from PIL import Image
 from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
 
 from .common import HISTORICAL_URL, DatasetFolder
@@ -24,15 +25,19 @@ class Historical(object):
 
         self.download(data_dir)
 
-        self.input_transform = Compose(
+        self.lr_transform = Compose(
             [
-                CenterCrop(self.crop_size),
-                Resize(self.crop_size // self.scale_factor),
+                Resize(self.image_size // self.scale_factor, Image.BICUBIC),
                 ToTensor(),
             ]
         )
 
-        self.target_transform = Compose([CenterCrop(self.crop_size), ToTensor()])
+        self.hr_transform = Compose(
+            [
+                Resize(self.image_size, Image.BICUBIC),
+                ToTensor(),
+            ]
+        )
 
     def download(self, data_dir):
 
@@ -47,8 +52,8 @@ class Historical(object):
     def get_dataset(self):
         return DatasetFolder(
             data_dir=self.root_dir,
-            input_transform=self.input_transform,
-            target_transform=self.target_transform,
+            lr_transform=self.lr_transform,
+            hr_transform=self.hr_transform,
             color_space=self.color_space,
             extensions=self.extensions,
         )

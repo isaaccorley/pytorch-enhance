@@ -15,16 +15,16 @@ class DatasetFolder(torch.utils.data.Dataset):
     def __init__(
         self,
         data_dir,
-        input_transform=None,
-        target_transform=None,
+        lr_transform=None,
+        hr_transform=None,
         color_space="RGB",
         extensions=[""],
     ):
         super(DatasetFolder, self).__init__()
 
         self.data_dir = data_dir
-        self.input_transform = input_transform
-        self.target_transform = target_transform
+        self.lr_transform = lr_transform
+        self.hr_transform = hr_transform
         self.color_space = color_space
         self.extensions = extensions
 
@@ -35,14 +35,14 @@ class DatasetFolder(torch.utils.data.Dataset):
         ]
 
     def __getitem__(self, idx):
-        x = load_img(self.file_names[idx])
-        y = x.copy()
-        if self.input_transform:
-            x = self.input_transform(x)
+        lr = load_img(self.file_names[idx])
+        hr = lr.copy()
+        if self.lr_transform:
+            lr = self.lr_transform(lr)
         if self.target_transform:
-            y = self.target_transform(y)
+            hr = self.hr_transform(hr)
 
-        return x, y
+        return lr, hr
 
     def __len__(self):
         return len(self.file_names)

@@ -34,8 +34,18 @@ The following benchmark datasets are available for usage:
 * **[BSDS300](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)**
 * **[BSDS500](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html)**
 * **[Set5](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
+
+<p align="center">
+    <img src="assets/Set5.gif" width="256"\>
+</p>
+
 * **[Set14](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
 * **[T91](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
+
+<p align="center">
+    <img src="assets/T91.gif" width="256"\>
+</p>
+
 * **[Historical](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
 
 TODO
