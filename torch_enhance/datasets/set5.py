@@ -23,7 +23,7 @@ class Set5(object):
         self.extensions = ['.png']
         self.url = SET5_URL
 
-        self.download(data_dir)
+        self.__download(data_dir)
 
         self.lr_transform = Compose(
             [
@@ -41,7 +41,7 @@ class Set5(object):
             ]
         )
 
-    def download(self, data_dir):
+    def __download(self, data_dir):
 
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)

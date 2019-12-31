@@ -3,7 +3,9 @@ import torch.nn as nn
 
 
 class Bicubic(nn.Module):
-    """ Bicubic Interpolation Upsampling module """
+    """
+    Bicubic Interpolation Upsampling module
+    """
     def __init__(self, scale_factor):
         super(Bicubic, self).__init__()
 

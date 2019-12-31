@@ -2,7 +2,9 @@ import torch.nn as nn
 
 
 class Base(object):
-    """ Base SR module containing common methods """
+    """
+    Base SR module containing common methods
+    """
     def normalize01(self, x):
         """ Normalize from [0, 255] -> [0, 1] """
         return x / 255

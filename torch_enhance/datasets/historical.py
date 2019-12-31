@@ -23,7 +23,7 @@ class Historical(object):
 
         self.crop_size = self.image_size - (self.image_size % self.scale_factor)
 
-        self.download(data_dir)
+        self.__download(data_dir)
 
         self.lr_transform = Compose(
             [
@@ -41,7 +41,7 @@ class Historical(object):
             ]
         )
 
-    def download(self, data_dir):
+    def __download(self, data_dir):
 
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)

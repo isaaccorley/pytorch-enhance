@@ -22,7 +22,7 @@ class BSDS300(object):
         self.extensions = ['.jpg']
         self.url = BSDS300_URL
 
-        self.download(data_dir)
+        self.__download(data_dir)
 
         self.lr_transform = Compose(
             [
@@ -40,7 +40,7 @@ class BSDS300(object):
             ]
         )
 
-    def download(self, data_dir):
+    def __download(self, data_dir):
 
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)
@@ -62,7 +62,7 @@ class BSDS300(object):
                     else:
                         _ = os.remove(path)
 
-    def get_dataset(self, train=True):
+    def __get_dataset(self, train=True):
         root_dir = os.path.join(self.root_dir, "train" if train else "test")
         return DatasetFolder(
             data_dir=root_dir,
@@ -71,3 +71,12 @@ class BSDS300(object):
             color_space=self.color_space,
             extensions=self.extensions,
         )
+
+    def get_train_set(self):
+        return self.__get_dataset(train=True)
+
+    def get_val_set(self):
+        return self.__get_dataset(train=False)
+
+    def get_test_set(self):
+        return self.__get_dataset(train=False)

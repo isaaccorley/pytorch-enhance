@@ -23,7 +23,7 @@ class BSDS500(object):
         self.extensions = ['.jpg']
         self.url = BSDS500_URL
 
-        self.download(data_dir)
+        self.__download(data_dir)
 
         self.lr_transform = Compose(
             [
@@ -41,7 +41,7 @@ class BSDS500(object):
             ]
         )
 
-    def download(self, data_dir):
+    def __download(self, data_dir):
 
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)
@@ -59,7 +59,7 @@ class BSDS500(object):
                 
             shutil.rmtree(os.path.join(data_dir, 'BSR'))
 
-    def get_dataset(self, set_type='train'):
+    def __get_dataset(self, set_type='train'):
 
         assert set_type in ['train', 'val', 'test']
         root_dir = os.path.join(self.root_dir, set_type)
@@ -70,3 +70,12 @@ class BSDS500(object):
             color_space=self.color_space,
             extensions=self.extensions,
         )
+
+    def get_train_set(self):
+        return self.__get_dataset(set_type='train')
+
+    def get_val_set(self):
+        return self.__get_dataset(set_type='val')
+
+    def get_test_set(self):
+        return self.__get_dataset(set_type='test')
