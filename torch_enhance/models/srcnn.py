@@ -21,12 +21,10 @@ class SRCNN(nn.Module, Base):
             nn.ReLU(),
             nn.Conv2d(in_channels=64, out_channels=32, kernel_size=1, stride=1, padding=0),
             nn.ReLU(),
-            nn.Conv2d(in_channels=32, out_channels=3, kernel_size=5, stride=1, padding=2,),
+            nn.Conv2d(in_channels=32, out_channels=3, kernel_size=5, stride=1, padding=2)
         )
 
     def forward(self, x):
         x = self.upsample(x)
-        x = self.normalize01(x)
         x = self.model(x)
-        x = self.denormalize01(x)
         return x

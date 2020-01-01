@@ -21,12 +21,10 @@ class ESPCN(nn.Module, Base):
             nn.ReLU(),
             nn.Conv2d(in_channels=64, out_channels=32, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            nn.Conv2d(in_channels=32, out_channels=scale_factor**2, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(in_channels=32, out_channels=3 * scale_factor**2, kernel_size=3, stride=1, padding=1),
             nn.PixelShuffle(scale_factor),
         )
 
     def forward(self, x):
-        x = self.normalize01(x)
         x = self.model(x)
-        x = self.denormalize01(x)
         return x

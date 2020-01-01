@@ -106,12 +106,10 @@ class SRResNet(nn.Module, Base):
         )
 
     def forward(self, x):
-        x = self.normalize01(x)
         x = self.head(x)
         shortcut = x
         x = self.res_blocks(x)
         x = self.tail(x) + shortcut
         x = self.upsample(x)
         x = self.output(x)
-        x = self.denormalize11(x)
         return x

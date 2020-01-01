@@ -34,7 +34,5 @@ class VDSR(nn.Module, Base):
 
     def forward(self, x):
         x = self.upsample(x)
-        x = self.normalize01(x)
         x = self.model(x) + x
-        x = self.denormalize01(x)
         return x

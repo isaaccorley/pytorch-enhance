@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 
 
@@ -20,3 +21,12 @@ class Base(object):
     def denormalize11(self, x):
         """ Normalize from [-1, 1] -> [0, 255] """
         return (x + 1) * 127.5
+
+    @torch.no_grad()
+    def enhance(self, x):
+        """ Super-resolve x and cast as image """
+        x = self.forward(x)
+        x = x.clamp(0, 255)
+        x = x.to(torch.uint8)
+        x = x.squeeze()
+        return x

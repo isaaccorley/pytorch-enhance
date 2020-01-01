@@ -1,47 +1,37 @@
 import os
 import shutil
-import glob
-from PIL import Image
-from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
 
-from .common import BSDS500_URL, DatasetFolder
+from .common import BSDS500_URL, SRDataset
 from .utils import download_and_extract_archive
 
 
-class BSDS500(object):
+class BSDS500(SRDataset):
+
+    url = BSDS500_URL
+    extensions = ['.jpg']
+
     def __init__(
         self,
         scale_factor=2,
         image_size=256,
-        data_dir=os.path.join(os.getcwd(), 'data'),
-        color_space='RGB'
+        color_space='RGB',
+        set_type='train',
+        data_dir=os.path.join(os.getcwd(), 'data')
     ):
+        super(BSDS500, self).__init__()
         self.scale_factor = scale_factor
         self.image_size = image_size
-        self.root_dir = os.path.join(data_dir, 'BSDS500')
         self.color_space = color_space
-        self.extensions = ['.jpg']
-        self.url = BSDS500_URL
 
-        self.__download(data_dir)
+        self.root_dir = os.path.join(data_dir, 'BSDS500')
+        self.download(data_dir)
+        self.set_dir = os.path.join(self.root_dir, set_type)
+        self.file_names = self.get_files(self.set_dir)
 
-        self.lr_transform = Compose(
-            [
-                Resize((self.image_size//self.scale_factor,
-                        self.image_size//self.scale_factor),
-                        Image.BICUBIC),
-                ToTensor(),
-            ]
-        )
+        self.lr_transform = self.get_lr_transforms()
+        self.hr_transform = self.get_hr_transforms()
 
-        self.hr_transform = Compose(
-            [
-                Resize((self.image_size, self.image_size), Image.BICUBIC),
-                ToTensor(),
-            ]
-        )
-
-    def __download(self, data_dir):
+    def download(self, data_dir):
 
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)
@@ -58,24 +48,3 @@ class BSDS500(object):
                 os.remove(os.path.join(self.root_dir, d, 'Thumbs.db'))
                 
             shutil.rmtree(os.path.join(data_dir, 'BSR'))
-
-    def __get_dataset(self, set_type='train'):
-
-        assert set_type in ['train', 'val', 'test']
-        root_dir = os.path.join(self.root_dir, set_type)
-        return DatasetFolder(
-            data_dir=root_dir,
-            lr_transform=self.lr_transform,
-            hr_transform=self.hr_transform,
-            color_space=self.color_space,
-            extensions=self.extensions,
-        )
-
-    def get_train_set(self):
-        return self.__get_dataset(set_type='train')
-
-    def get_val_set(self):
-        return self.__get_dataset(set_type='val')
-
-    def get_test_set(self):
-        return self.__get_dataset(set_type='test')
