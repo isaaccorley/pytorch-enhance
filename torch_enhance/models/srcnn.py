@@ -4,7 +4,7 @@ from .base import Base
 from .baseline import Bicubic
 
 
-class SRCNN(nn.Module, Base):
+class SRCNN(Base):
     """
     Super-Resolution Convolutional Neural Network
     https://arxiv.org/pdf/1501.00092v3.pdf

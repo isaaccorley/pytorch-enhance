@@ -3,10 +3,12 @@
 *.png
 *.jpg
 *.jpeg
+datasets/*
 dist/*
 build/*
 torch_enhance.egg-info/*
 .eggs/*
+.pytest_cache/
 lightning_logs/*
 .vscode/*
-test.py
+playground.py

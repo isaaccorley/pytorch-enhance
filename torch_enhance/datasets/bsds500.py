@@ -2,7 +2,7 @@ import os
 import shutil
 
 from .common import BSDS500_URL, SRDataset
-from .utils import download_and_extract_archive
+from torchvision.datasets.utils import download_and_extract_archive
 
 
 class BSDS500(SRDataset):
@@ -16,7 +16,7 @@ class BSDS500(SRDataset):
         image_size=256,
         color_space='RGB',
         set_type='train',
-        data_dir=os.path.join(os.getcwd(), 'data')
+        data_dir=os.path.join(os.getcwd(), 'datasets')
     ):
         super(BSDS500, self).__init__()
         self.scale_factor = scale_factor

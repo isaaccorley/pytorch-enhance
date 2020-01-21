@@ -1,7 +1,7 @@
 import os
 
 from .common import HISTORICAL_URL, SRDataset
-from .utils import download_and_extract_archive
+from torchvision.datasets.utils import download_and_extract_archive
 
 
 class Historical(SRDataset):
@@ -14,7 +14,7 @@ class Historical(SRDataset):
         scale_factor=2,
         image_size=256,
         color_space='L',
-        data_dir=os.path.join(os.getcwd(), 'data')
+        data_dir=os.path.join(os.getcwd(), 'datasets')
     ):
         super(Historical, self).__init__()
 

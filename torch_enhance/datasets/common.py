@@ -16,7 +16,7 @@ class SRDataset(torch.utils.data.Dataset):
     def __init__(self):
         super(SRDataset, self).__init__()
 
-        self.root_dir = 'data'
+        self.root_dir = 'datasets'
         self.color_space = 'RGB'
         self.extensions = ['']
         self.lr_transform = None

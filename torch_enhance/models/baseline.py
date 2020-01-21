@@ -1,8 +1,9 @@
-
 import torch.nn as nn
 
+from .base import Base
 
-class Bicubic(nn.Module):
+
+class Bicubic(Base):
     """
     Bicubic Interpolation Upsampling module
     """

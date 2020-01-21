@@ -1,7 +1,7 @@
 import os
 
 from .common import T91_URL, SRDataset
-from .utils import download_and_extract_archive
+from torchvision.datasets.utils import download_and_extract_archive
 
 
 class T91(SRDataset):
@@ -14,7 +14,7 @@ class T91(SRDataset):
         scale_factor=2,
         image_size=256,
         color_space='RGB',
-        data_dir=os.path.join(os.getcwd(), 'data')
+        data_dir=os.path.join(os.getcwd(), 'datasets')
     ):
         super(T91, self).__init__()
         self.scale_factor = scale_factor

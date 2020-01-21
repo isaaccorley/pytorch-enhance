@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 
-class Base(object):
+class Base(nn.Module):
     """
     Base SR module containing common methods
     """

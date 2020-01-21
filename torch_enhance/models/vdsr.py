@@ -4,7 +4,7 @@ from .base import Base
 from .baseline import Bicubic
 
 
-class VDSR(nn.Module, Base):
+class VDSR(Base):
     """
     Very Deep Super Resolution
     https://arxiv.org/pdf/1511.04587.pdf

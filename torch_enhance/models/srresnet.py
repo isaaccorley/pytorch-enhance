@@ -60,7 +60,7 @@ class UpsampleBlock(nn.Module):
         return x
 
 
-class SRResNet(nn.Module, Base):
+class SRResNet(Base):
     """
     Super-Resolution Residual Neural Network
     https://arxiv.org/pdf/1609.04802v5.pdf

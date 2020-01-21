@@ -83,3 +83,10 @@ $ cd examples
 ```
 
 * **[Get up and benchmarking quickly with PyTorch Lightning](examples/pytorch_lightning_srcnn.py)**
+
+
+## Running Tests
+
+```
+$ pytest -ra
+```
