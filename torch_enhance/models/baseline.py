@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-from .base import Base
+from .common import Base
 
 
 class Bicubic(Base):

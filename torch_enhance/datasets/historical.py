@@ -14,7 +14,7 @@ class Historical(SRDataset):
         scale_factor=2,
         image_size=256,
         color_space='L',
-        data_dir=os.path.join(os.getcwd(), 'datasets')
+        data_dir=None
     ):
         super(Historical, self).__init__()
 
@@ -22,6 +22,9 @@ class Historical(SRDataset):
         self.image_size = image_size
         self.color_space = color_space
 
+        if data_dir is None:
+            self.data_dir = os.path.join(os.getcwd(), self.base_dir)
+            
         self.root_dir = os.path.join(data_dir, 'historical')
         self.download(data_dir)
         self.file_names = self.get_files(self.root_dir)

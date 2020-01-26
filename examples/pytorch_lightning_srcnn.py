@@ -94,11 +94,13 @@ class Enhance(pl.LightningModule):
             return DataLoader(self.test_set.get_dataset(), batch_size=1)
 
 
-scale_factor = 2
-data = BSDS300(scale_factor)
-test_set = Set5(scale_factor)
-model = SRCNN(scale_factor)
-module = Enhance(model, data, scale_factor, test_set)
-trainer = pl.Trainer(max_nb_epochs=1, train_percent_check=0.1, val_percent_check=0.1)
-trainer.fit(module)
-trainer.test()
+
+if __name__ = '__main__':
+    scale_factor = 2
+    data = BSDS300(scale_factor)
+    test_set = Set5(scale_factor)
+    model = SRCNN(scale_factor)
+    module = Enhance(model, data, scale_factor, test_set)
+    trainer = pl.Trainer(max_nb_epochs=1, train_percent_check=0.1, val_percent_check=0.1)
+    trainer.fit(module)
+    trainer.test()

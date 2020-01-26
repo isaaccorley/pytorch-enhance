@@ -2,7 +2,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .base import Base
+from .common import Base
+
+WEIGHTS_URL = ""
+WEIGHTS_PATH = ""
 
 
 class ResidualBlock(nn.Module):
@@ -65,12 +68,12 @@ class SRResNet(Base):
     Super-Resolution Residual Neural Network
     https://arxiv.org/pdf/1609.04802v5.pdf
     """
-    def __init__(self, scale_factor, n_res_blocks=16):
+    def __init__(self, scale_factor, pretrained=False):
 
         super(SRResNet, self).__init__()
 
-        self.loss = nn.MSELoss()
-
+        self.n_res_blocks = 16
+        
         # Pre Residual Blocks
         self.head = nn.Sequential(
             nn.Conv2d(in_channels=3, out_channels=64, kernel_size=9, stride=1, padding=4),
@@ -80,18 +83,14 @@ class SRResNet(Base):
         # Residual Blocks
         self.res_blocks = [
             ResidualBlock(channels=64, kernel_size=3, activation=nn.PReLU) \
-            for _ in range(n_res_blocks)
+            for _ in range(self.n_res_blocks)
             ]
         self.res_blocks = nn.Sequential(*self.res_blocks)
-
-        # Post Residual Blocks
-        self.tail = nn.Sequential(
-            nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1),
-            nn.BatchNorm2d(num_features=64)
-        )    
+        self.res_blocks.append(nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1))
+        self.res_blocks.append(nn.BatchNorm2d(num_features=64))
 
         # Upsamples
-        n_upsamples = 1 if scale_factor ==2 else 2
+        n_upsamples = 1 if scale_factor == 2 else 2
         self.upsample = UpsampleBlock(
             n_upsamples=n_upsamples,
             channels=64,
@@ -100,16 +99,18 @@ class SRResNet(Base):
         )
 
         # Output layer
-        self.output = nn.Sequential(
+        self.tail = nn.Sequential(
             nn.Conv2d(in_channels=64, out_channels=3, kernel_size=9, stride=1, padding=4),
             nn.Tanh()
         )
 
+        if pretrained:
+            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
+
     def forward(self, x):
         x = self.head(x)
         shortcut = x
-        x = self.res_blocks(x)
-        x = self.tail(x) + shortcut
+        x = self.res_blocks(x) + shortcut
         x = self.upsample(x)
-        x = self.output(x)
+        x = self.tail(x)
         return x

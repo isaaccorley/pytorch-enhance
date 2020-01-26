@@ -10,13 +10,15 @@ SET5_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/Set5.
 SET14_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/Set14.zip'
 T91_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/T91.zip'
 HISTORICAL_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/historical.zip'
+DIV2K_TRAIN_URL = 'http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip'
+DIV2K_TEST_URL = 'http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip'
 
 
 class SRDataset(torch.utils.data.Dataset):
     def __init__(self):
         super(SRDataset, self).__init__()
 
-        self.root_dir = 'datasets'
+        self.base_dir = '.data'
         self.color_space = 'RGB'
         self.extensions = ['']
         self.lr_transform = None
