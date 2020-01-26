@@ -17,12 +17,13 @@ class Set14(SRDataset):
         data_dir=None
     ):
         super(Set14, self).__init__()
+
         self.scale_factor = scale_factor
         self.image_size = image_size
         self.color_space = color_space
 
         if data_dir is None:
-            self.data_dir = os.path.join(os.getcwd(), self.base_dir)
+            data_dir = os.path.join(os.getcwd(), self.base_dir)
 
         self.root_dir = os.path.join(data_dir, 'Set14')
         self.download(data_dir)

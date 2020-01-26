@@ -23,7 +23,7 @@ class BSDS300(SRDataset):
         self.color_space = color_space
 
         if data_dir is None:
-            self.data_dir = os.path.join(os.getcwd(), self.base_dir)
+            data_dir = os.path.join(os.getcwd(), self.base_dir)
 
         self.root_dir = os.path.join(data_dir, 'BSDS300')
         self.download(data_dir)

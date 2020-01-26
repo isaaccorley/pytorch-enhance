@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .common import Base
+from .base import Base
 
 WEIGHTS_URL = ""
 WEIGHTS_PATH = ""

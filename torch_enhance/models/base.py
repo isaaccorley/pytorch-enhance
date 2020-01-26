@@ -7,7 +7,7 @@ import torchvision
 
 MODELS_PATH = '.models'
 
-class SRBase(nn.Module):
+class Base(nn.Module):
     """
     Base SR module containing common methods
     """
@@ -34,7 +34,7 @@ class SRBase(nn.Module):
 
         download_and_extract_archive(url, MODELS_PATH, remove_finished=True)
         shutil.copyfile(weights_path, os.path.join(MODELS_PATH, base_file))
-        shutil.rmtree(os.path.dirname(weights_path)
+        shutil.rmtree(os.path.dirname(weights_path))
 
     def normalize01(self, x):
         """ Normalize from [0, 255] -> [0, 1] """
