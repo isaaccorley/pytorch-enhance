@@ -6,10 +6,10 @@ from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
 
 BSDS300_URL = "http://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/BSDS300-images.tgz"
 BSDS500_URL = "http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz"
-SET5_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/Set5.zip'
-SET14_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/Set14.zip'
-T91_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/T91.zip'
-HISTORICAL_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/data/historical.zip'
+SET5_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/Set5.zip'
+SET14_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/Set14.zip'
+T91_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/T91.zip'
+HISTORICAL_URL = 'https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/historical.zip'
 DIV2K_TRAIN_URL = 'http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip'
 DIV2K_TEST_URL = 'http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip'
 
