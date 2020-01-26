@@ -14,13 +14,18 @@ class T91(SRDataset):
         scale_factor=2,
         image_size=256,
         color_space='RGB',
-        data_dir=None
+        data_dir=None,
+        lr_transforms=None,
+        hr_transforms=None
     ):
         super(T91, self).__init__()
+        
         self.scale_factor = scale_factor
         self.image_size = image_size
         self.color_space = color_space
-
+        self.lr_transforms = lr_transforms
+        self.hr_transforms = hr_transforms
+        
         if data_dir is None:
             data_dir = os.path.join(os.getcwd(), self.base_dir)
 
@@ -28,8 +33,10 @@ class T91(SRDataset):
         self.download(data_dir)
         self.file_names = self.get_files(self.root_dir)
 
-        self.lr_transform = self.get_lr_transforms()
-        self.hr_transform = self.get_hr_transforms()
+        if self.lr_transforms is None:
+            self.lr_transform = self.get_lr_transforms()
+        if self.hr_transforms is None:
+            self.hr_transform = self.get_hr_transforms()
 
     def download(self, data_dir):
 
