@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3739368.svg)](https://doi.org/10.5281/zenodo.3739368)
+
 # pytorch-enhance: Image Super-Resolution in PyTorch
 Library for Minimal Modern Image Super-Resolution in PyTorch
 
@@ -90,4 +92,21 @@ $ cd examples
 
 ```
 $ pytest -ra
+```
+
+## Cite
+
+Please cite this repository if you used this code in your own work:
+
+```
+@software{isaac_corley_2020_3739368,
+  author       = {Isaac Corley},
+  title        = {IsaacCorley/pytorch-enhance: First alpha release},
+  month        = apr,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {0.1.1},
+  doi          = {10.5281/zenodo.3739368},
+  url          = {https://doi.org/10.5281/zenodo.3739368}
+}
 ```
