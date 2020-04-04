@@ -3,7 +3,8 @@
 *.png
 *.jpg
 *.jpeg
-.datasets/*
+.data/*
+.models/*
 dist/*
 build/*
 torch_enhance.egg-info/*
