@@ -17,7 +17,7 @@ Welcome to PyTorch Enhance's documentation!
     :members:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
 
