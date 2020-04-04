@@ -1,25 +1,20 @@
+:github_url: https://github.com/IsaacCorley/pytorch_enhance
+
 Welcome to PyTorch Enhance's documentation!
 ===========================================
 
-.. automodule:: torch_enhance.datasets
-    :members:
-
-.. automodule:: torch_enhance.models
-    :members:
-
-.. automodule:: torch_enhance.losses
-    :members:
-
-.. automodule:: torch_enhance.metrics
-    :members:
-
-.. automodule:: torch_enhance.utils
-    :members:
+PyTorch Enhance is a Deep Learning Super-Resolution library for `PyTorch <https://pytorch.org/>`_.
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Contents:
+   :glob:
+   :maxdepth: 1
+   :caption: Package Reference
 
+   modules/models
+   modules/datasets
+   modules/losses
+   modules/metrics
+   modules/utils
 
 
 Indices and tables

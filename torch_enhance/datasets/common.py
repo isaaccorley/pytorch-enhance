@@ -55,8 +55,7 @@ class SRDataset(torch.utils.data.Dataset):
         )
         
     def get_files(self, root_dir: str) -> List[str]:
-        """
-        Returns  a list of valid image files in a directory
+        """Returns  a list of valid image files in a directory
 
         Parameters
         ----------
@@ -77,8 +76,7 @@ class SRDataset(torch.utils.data.Dataset):
         ]
 
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, torch.Tensor]:
-        """
-        Returns  a tuple of and lr and hr torch tensors
+        """Returns  a tuple of and lr and hr torch tensors
 
         Parameters
         ----------
@@ -104,7 +102,7 @@ class SRDataset(torch.utils.data.Dataset):
         return lr, hr
 
     def __len__(self) -> int:
-        """ Return number of images in dataset
+        """Return number of images in dataset
 
         Returns
         -------
@@ -116,8 +114,7 @@ class SRDataset(torch.utils.data.Dataset):
         return len(self.file_names)
 
     def is_valid_file(self, file_path: str) -> bool:
-        """
-        Returns boolean if the given `file_path` has a valid image extension 
+        """Returns boolean if the given `file_path` has a valid image extension 
 
         Parameters
         ----------
@@ -134,8 +131,7 @@ class SRDataset(torch.utils.data.Dataset):
         return any(file_path.endswith(ext) for ext in self.extensions)
 
     def load_img(self, file_path) -> Image.Image:
-        """
-        Returns a PIL Image of the image located at `file_path`
+        """Returns a PIL Image of the image located at `file_path`
 
         Parameters
         ----------
