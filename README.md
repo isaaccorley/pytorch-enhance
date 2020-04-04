@@ -6,6 +6,7 @@ Library for Minimal Modern Image Super-Resolution in PyTorch
 --------------------------------------------------------------------------------
 PyTorch Enhance provides a consolidated package of popular Image Super-Resolution models, datasets, and metrics to allow for quick and painless benchmarking or for quickly adding pretrained models to your application.
 
+[Read the Docs](https://pytorch-enhance.readthedocs.io/en/latest/)
 
 ## Installation
 

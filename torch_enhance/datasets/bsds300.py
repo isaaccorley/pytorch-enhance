@@ -4,6 +4,7 @@ import shutil
 from .common import BSDS300_URL, SRDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
+
 class BSDS300(SRDataset):
 
     url = BSDS300_URL
