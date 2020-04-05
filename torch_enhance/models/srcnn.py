@@ -7,18 +7,16 @@ from .baseline import Bicubic
 
 class SRCNN(Base):
     """Super-Resolution Convolutional Neural Network
-        https://arxiv.org/pdf/1501.00092v3.pdf
-        
+    https://arxiv.org/pdf/1501.00092v3.pdf
+    
+    Parameters
+    ----------
+    scale_factor : int
+        Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
     """
     def __init__(self, scale_factor: int):
-        """Constructor
-        
-        Parameters
-        ----------
-        scale_factor : int
-            Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
-        """
         super(SRCNN, self).__init__()
 
         self.upsample = Bicubic(scale_factor)

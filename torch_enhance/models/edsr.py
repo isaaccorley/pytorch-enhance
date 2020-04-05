@@ -6,8 +6,8 @@ from .base import Base
 
 
 class UpsampleBlock(nn.Module):
-    """
-    Base PixelShuffle Upsample Block
+    """Base PixelShuffle Upsample Block
+
     """
     def __init__(
         self,
@@ -33,8 +33,8 @@ class UpsampleBlock(nn.Module):
 
 
 class ResidualBlock(nn.Module):
-    """
-    Base Residual Block
+    """Base Residual Block
+
     """
     def __init__(
         self,
@@ -63,18 +63,16 @@ class ResidualBlock(nn.Module):
 
 class EDSR(Base):
     """Enhanced Deep Residual Networks for Single Image Super-Resolution
-        https://arxiv.org/pdf/1707.02921v1.pdf
-        
+    https://arxiv.org/pdf/1707.02921v1.pdf
+    
+    Parameters
+    ----------
+    scale_factor : int
+        Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
     """
     def __init__(self, scale_factor: int):
-        """Constructor
-        
-        Parameters
-        ----------
-        scale_factor : int
-            Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
-        """
         super(EDSR, self).__init__()
 
         self.n_res_blocks = 32

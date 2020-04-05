@@ -4,7 +4,7 @@ from torchvision.utils import make_grid
 
 
 def plot_compare(sr, hr, baseline, filename):
-    """Plot side by side comparison
+    """Plot Super-Resolution and High-Resolution image comparison
     
     """
     sr, hr, baseline = sr.squeeze(), hr.squeeze(), baseline.squeeze()

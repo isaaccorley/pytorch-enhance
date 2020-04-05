@@ -1,6 +1,6 @@
 import os
 
-from .common import HISTORICAL_URL, BaseDataset
+from .base import HISTORICAL_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 

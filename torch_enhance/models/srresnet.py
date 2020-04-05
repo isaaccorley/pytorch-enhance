@@ -6,8 +6,8 @@ from .base import Base
 
 
 class ResidualBlock(nn.Module):
-    """
-    Base Residual Block
+    """Base Residual Block
+
     """
     def __init__(
         self,
@@ -32,8 +32,8 @@ class ResidualBlock(nn.Module):
 
 
 class UpsampleBlock(nn.Module):
-    """
-    Base PixelShuffle Upsample Block
+    """Base PixelShuffle Upsample Block
+
     """
     def __init__(
         self,
@@ -62,18 +62,16 @@ class UpsampleBlock(nn.Module):
 
 class SRResNet(Base):
     """Super-Resolution Residual Neural Network
-        https://arxiv.org/pdf/1609.04802v5.pdf
+    https://arxiv.org/pdf/1609.04802v5.pdf
+
+    Parameters
+    ----------
+    scale_factor : int
+        Super-Resolution scale factor. Determines Low-Resolution downsampling.
         
     """
     def __init__(self, scale_factor: int):
-        """Constructor
-        
-        Parameters
-        ----------
-        scale_factor : int
-            Super-Resolution scale factor. Determines Low-Resolution downsampling.
-            
-        """
+
         super(SRResNet, self).__init__()
 
         self.n_res_blocks = 16

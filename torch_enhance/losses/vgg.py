@@ -6,17 +6,15 @@ import torchvision
 
 class VGG(nn.Module):
     """VGG/Perceptual Loss
+    
+    Parameters
+    ----------
+    conv_index : str
+        Convolutional layer in VGG model to use as perceptual output
 
     """
     def __init__(self, conv_index: str = '22'):
-        """Constructor
 
-        Parameters
-        ----------
-        conv_index : str
-            Convolutional layer in VGG model to use as perceptual output
-
-        """
         super(VGG, self).__init__()
         vgg_features = torchvision.models.vgg19(pretrained=True).features
         modules = [m for m in vgg_features]

@@ -1,6 +1,6 @@
 import os
 
-from .common import SET14_URL, BaseDataset
+from .base import SET14_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 

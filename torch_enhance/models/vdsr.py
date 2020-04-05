@@ -7,18 +7,16 @@ from .baseline import Bicubic
 
 class VDSR(Base):
     """Very Deep Super Resolution
-        https://arxiv.org/pdf/1511.04587.pdf
-
+    https://arxiv.org/pdf/1511.04587.pdf
+    
+    Parameters
+    ----------
+    scale_factor : int
+        Super-Resolution scale factor. Determines Low-Resolution downsampling.
+        
     """
     def __init__(self, scale_factor):
-        """Constructor
-        
-        Parameters
-        ----------
-        scale_factor : int
-            Super-Resolution scale factor. Determines Low-Resolution downsampling.
-            
-        """
+
         super(VDSR, self).__init__()
 
         self.n_layers = 20

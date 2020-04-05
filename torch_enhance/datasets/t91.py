@@ -1,6 +1,6 @@
 import os
 
-from .common import T91_URL, BaseDataset
+from .base import T91_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 

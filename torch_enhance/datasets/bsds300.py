@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from .common import BSDS300_URL, BaseDataset
+from .base import BSDS300_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 
