@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Overview: module code &mdash; PyTorch Enhance 0.1.1 documentation</title>
+  <title>torch_enhance.losses &mdash; PyTorch Enhance 0.1.1 documentation</title>
   
 
   
@@ -34,7 +34,9 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="torch_enhance.metrics" href="metrics.html" />
+    <link rel="prev" title="torch_enhance.models" href="models.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -83,12 +85,12 @@
             
             
               <p class="caption"><span class="caption-text">Package Reference</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../source/datasets.html">torch_enhance.datasets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/models.html">torch_enhance.models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/losses.html">torch_enhance.losses</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/metrics.html">torch_enhance.metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../source/utils.html">torch_enhance.utils</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">torch_enhance.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">torch_enhance.models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">torch_enhance.losses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics.html">torch_enhance.metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">torch_enhance.utils</a></li>
 </ul>
 
             
@@ -134,10 +136,14 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Overview: module code</li>
+      <li>torch_enhance.losses</li>
     
     
       <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/losses.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -149,27 +155,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="torch_enhance/datasets/bsds300.html">torch_enhance.datasets.bsds300</a></li>
-<li><a href="torch_enhance/datasets/bsds500.html">torch_enhance.datasets.bsds500</a></li>
-<li><a href="torch_enhance/datasets/historical.html">torch_enhance.datasets.historical</a></li>
-<li><a href="torch_enhance/datasets/set14.html">torch_enhance.datasets.set14</a></li>
-<li><a href="torch_enhance/datasets/set5.html">torch_enhance.datasets.set5</a></li>
-<li><a href="torch_enhance/datasets/t91.html">torch_enhance.datasets.t91</a></li>
-<li><a href="torch_enhance/losses/vgg.html">torch_enhance.losses.vgg</a></li>
-<li><a href="torch_enhance/metrics.html">torch_enhance.metrics</a></li>
-<li><a href="torch_enhance/models/baseline.html">torch_enhance.models.baseline</a></li>
-<li><a href="torch_enhance/models/espcn.html">torch_enhance.models.espcn</a></li>
-<li><a href="torch_enhance/models/srcnn.html">torch_enhance.models.srcnn</a></li>
-<li><a href="torch_enhance/models/srresnet.html">torch_enhance.models.srresnet</a></li>
-<li><a href="torch_enhance/models/vdsr.html">torch_enhance.models.vdsr</a></li>
-<li><a href="torch_enhance/utils.html">torch_enhance.utils</a></li>
-</ul>
+  <div class="section" id="module-torch_enhance.losses">
+<span id="torch-enhance-losses"></span><h1>torch_enhance.losses<a class="headerlink" href="#module-torch_enhance.losses" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="torch_enhance.losses.VGG">
+<em class="property">class </em><code class="sig-prename descclassname">torch_enhance.losses.</code><code class="sig-name descname">VGG</code><span class="sig-paren">(</span><em class="sig-param">conv_index</em>, <em class="sig-param">rgb_range=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torch_enhance/losses/vgg.html#VGG"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch_enhance.losses.VGG" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="torch_enhance.losses.VGG.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param">sr</em>, <em class="sig-param">hr</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torch_enhance/losses/vgg.html#VGG.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch_enhance.losses.VGG.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metrics.html" class="btn btn-neutral float-right" title="torch_enhance.metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="models.html" class="btn btn-neutral float-left" title="torch_enhance.models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

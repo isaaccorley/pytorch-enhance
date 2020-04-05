@@ -7,19 +7,17 @@ PyTorch Enhance is a Deep Learning Super-Resolution library for `PyTorch <https:
 
 .. toctree::
    :glob:
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Package Reference
 
-   modules/models
-   modules/datasets
-   modules/losses
-   modules/metrics
-   modules/utils
-
+   source/datasets
+   source/models
+   source/losses
+   source/metrics
+   source/utils
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`

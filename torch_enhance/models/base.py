@@ -10,6 +10,7 @@ MODELS_PATH = '.models'
 class Base(nn.Module):
     """
     Base SR module containing common methods
+    
     """
 
     def __init__(self):

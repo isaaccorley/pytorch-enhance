@@ -63,7 +63,7 @@ class ResidualBlock(nn.Module):
 
 
 class EDSR(Base):
-    def __init__(self, scale_factor, pretrained=False)
+    def __init__(self, scale_factor, pretrained=False):
         super(EDSR, self).__init__()
 
         self.n_res_blocks = 32

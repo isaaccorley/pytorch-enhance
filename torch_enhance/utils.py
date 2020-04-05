@@ -1,6 +1,5 @@
 import torch
 import torchvision
-from torchvision.transforms import ToPILImage
 from torchvision.utils import make_grid
 
 
