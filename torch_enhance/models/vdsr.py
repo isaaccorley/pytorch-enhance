@@ -3,16 +3,21 @@ import torch.nn as nn
 from .base import Base
 from .baseline import Bicubic
 
-WEIGHTS_URL = ""
-WEIGHTS_PATH = ""
-
 
 class VDSR(Base):
     """Very Deep Super Resolution
         https://arxiv.org/pdf/1511.04587.pdf
 
     """
-    def __init__(self, scale_factor, pretrained=False):
+    def __init__(self, scale_factor):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+            
+        """
         super(VDSR, self).__init__()
 
         self.n_layers = 20
@@ -33,9 +38,6 @@ class VDSR(Base):
         layers.append(nn.Conv2d(in_channels=64, out_channels=3, kernel_size=3, stride=1, padding=1))
 
         self.model = nn.Sequential(*layers)
-
-        if pretrained:
-            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
 
     def forward(self, x):
         """Super-resolve Low-Resolution input tensor

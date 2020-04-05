@@ -3,15 +3,21 @@ import torch.nn as nn
 from .base import Base
 from .baseline import Bicubic
 
-WEIGHTS_URL = ""
-WEIGHTS_PATH = ""
 
 class SRCNN(Base):
     """Super-Resolution Convolutional Neural Network
         https://arxiv.org/pdf/1501.00092v3.pdf
         
     """
-    def __init__(self, scale_factor, pretrained=False):
+    def __init__(self, scale_factor: int):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
+        """
         super(SRCNN, self).__init__()
 
         self.upsample = Bicubic(scale_factor)
@@ -24,10 +30,7 @@ class SRCNN(Base):
             nn.Conv2d(in_channels=32, out_channels=3, kernel_size=5, stride=1, padding=2)
         )
 
-        if pretrained:
-            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
-
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
         Parameters

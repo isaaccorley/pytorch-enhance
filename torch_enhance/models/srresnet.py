@@ -4,9 +4,6 @@ import torch.nn.functional as F
 
 from .base import Base
 
-WEIGHTS_URL = ""
-WEIGHTS_PATH = ""
-
 
 class ResidualBlock(nn.Module):
     """
@@ -14,8 +11,8 @@ class ResidualBlock(nn.Module):
     """
     def __init__(
         self,
-        channels,
-        kernel_size,
+        channels: int,
+        kernel_size: int,
         activation
     ):
 
@@ -29,7 +26,7 @@ class ResidualBlock(nn.Module):
             nn.BatchNorm2d(num_features=channels)
         )
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.model(x) + x
         return x
 
@@ -40,9 +37,9 @@ class UpsampleBlock(nn.Module):
     """
     def __init__(
         self,
-        n_upsamples,
-        channels,
-        kernel_size,
+        n_upsamples: int,
+        channels: int,
+        kernel_size: int,
         activation
     ):
 
@@ -58,7 +55,7 @@ class UpsampleBlock(nn.Module):
 
         self.model = nn.Sequential(*layers)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.model(x)
         return x
 
@@ -68,8 +65,15 @@ class SRResNet(Base):
         https://arxiv.org/pdf/1609.04802v5.pdf
         
     """
-    def __init__(self, scale_factor, pretrained=False):
-
+    def __init__(self, scale_factor: int):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+            
+        """
         super(SRResNet, self).__init__()
 
         self.n_res_blocks = 16
@@ -104,10 +108,7 @@ class SRResNet(Base):
             nn.Tanh()
         )
 
-        if pretrained:
-            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
-
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
         Parameters

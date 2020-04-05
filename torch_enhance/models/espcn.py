@@ -3,16 +3,23 @@ import torch.nn as nn
 
 from .base import Base
 
-WEIGHTS_URL = ""
-WEIGHTS_PATH = ""
-
 
 class ESPCN(Base):
     """Efficient Sub-Pixel Convolutional Neural Network
         https://arxiv.org/pdf/1609.05158v2.pdf
         
     """
-    def __init__(self, scale_factor, pretrained=False):
+    def __init__(self, scale_factor: int):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+        pretrained : bool
+            If True download and load pretrained weights
+            
+        """
         super(ESPCN, self).__init__()
 
         self.model = nn.Sequential(
@@ -26,10 +33,7 @@ class ESPCN(Base):
             nn.PixelShuffle(scale_factor),
         )
 
-        if pretrained:
-            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
-
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
         Parameters

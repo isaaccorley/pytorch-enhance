@@ -11,7 +11,6 @@ class Base(nn.Module):
     """Base Super-Resolution module
     
     """
-
     def __init__(self):
         self.loss = nn.MSELoss()
 

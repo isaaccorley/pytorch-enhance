@@ -12,11 +12,11 @@ class BSDS300(SRDataset):
 
     def __init__(
         self,
-        scale_factor=2,
-        image_size=256,
-        color_space='RGB',
-        train=True,
-        data_dir=None,
+        scale_factor: int = 2,
+        image_size: int = 256,
+        color_space: str = 'RGB',
+        train: bool = True,
+        data_dir: str = '',
         lr_transforms=None,
         hr_transforms=None
     ):
@@ -28,7 +28,7 @@ class BSDS300(SRDataset):
         self.lr_transforms = lr_transforms
         self.hr_transforms = hr_transforms
 
-        if data_dir is None:
+        if data_dir == '':
             data_dir = os.path.join(os.getcwd(), self.base_dir)
 
         self.root_dir = os.path.join(data_dir, 'BSDS300')
@@ -41,8 +41,19 @@ class BSDS300(SRDataset):
         if self.hr_transforms is None:
             self.hr_transform = self.get_hr_transforms()
 
-    def download(self, data_dir):
+    def download(self, data_dir: str) -> None:
+        """Download dataset
 
+        Parameters
+        ----------
+        data_dir : str
+            Path to base dataset directory
+
+        Returns
+        -------
+        None
+
+        """
         if not os.path.exists(data_dir):
             os.mkdir(data_dir)
 

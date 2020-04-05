@@ -4,9 +4,6 @@ import torch.nn.functional as F
 
 from .base import Base
 
-WEIGHTS_URL = ""
-WEIGHTS_PATH = ""
-
 
 class UpsampleBlock(nn.Module):
     """
@@ -14,9 +11,9 @@ class UpsampleBlock(nn.Module):
     """
     def __init__(
         self,
-        n_upsamples,
-        channels,
-        kernel_size
+        n_upsamples: int,
+        channels: int,
+        kernel_size: int
     ):
 
         super(UpsampleBlock, self).__init__()
@@ -30,7 +27,7 @@ class UpsampleBlock(nn.Module):
 
         self.model = nn.Sequential(*layers)
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.model(x)
         return x
 
@@ -41,10 +38,10 @@ class ResidualBlock(nn.Module):
     """
     def __init__(
         self,
-        channels,
-        kernel_size,
-        activation,
-        res_scale
+        channels: int,
+        kernel_size: int,
+        res_scale: int,
+        activation
     ):
 
         super(ResidualBlock, self).__init__()
@@ -55,7 +52,7 @@ class ResidualBlock(nn.Module):
             nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=kernel_size, stride=1, padding=kernel_size//2),
         )
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         shortcut = x
         x = self.model(x) * self.res_scale
         x = x + shortcut
@@ -67,7 +64,15 @@ class EDSR(Base):
         https://arxiv.org/pdf/1707.02921v1.pdf
         
     """
-    def __init__(self, scale_factor, pretrained=False):
+    def __init__(self, scale_factor: int):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
+        """
         super(EDSR, self).__init__()
 
         self.n_res_blocks = 32
@@ -79,7 +84,7 @@ class EDSR(Base):
 
         # Residual Blocks
         self.res_blocks = [
-            ResidualBlock(channels=256, kernel_size=3, activation=nn.ReLU, res_scale=0.1) \
+            ResidualBlock(channels=256, kernel_size=3, res_scale=0.1, activation=nn.ReLU) \
             for _ in range(self.n_res_blocks)
             ]
         self.res_blocks.append(nn.Conv2d(in_channels=256, out_channels=256, kernel_size=3, stride=1, padding=1))
@@ -98,10 +103,7 @@ class EDSR(Base):
             nn.Conv2d(in_channels=256, out_channels=3, kernel_size=3, stride=1, padding=1),
         )
         
-        if pretrained:
-            self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
-
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
         Parameters

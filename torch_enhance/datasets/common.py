@@ -20,7 +20,6 @@ class SRDataset(torch.utils.data.Dataset):
     """Base Super Resolution Dataset Class
 
     """
-
     def __init__(self):
         super(SRDataset, self).__init__()
 
@@ -68,7 +67,6 @@ class SRDataset(torch.utils.data.Dataset):
             List of valid images in `root_dir` directory.
 
         """
-
         return [
             os.path.join(root_dir, x)
             for x in os.listdir(root_dir)
@@ -91,7 +89,6 @@ class SRDataset(torch.utils.data.Dataset):
             High Resolution transformed indexed image.
 
         """
-
         lr = self.load_img(self.file_names[idx])
         hr = lr.copy()
         if self.lr_transform:
@@ -110,7 +107,6 @@ class SRDataset(torch.utils.data.Dataset):
             Number of images in dataset file_names list
 
         """
-
         return len(self.file_names)
 
     def is_valid_file(self, file_path: str) -> bool:
@@ -127,10 +123,9 @@ class SRDataset(torch.utils.data.Dataset):
             True if `file_path` has a valid image extension otherwise False
 
         """
-
         return any(file_path.endswith(ext) for ext in self.extensions)
 
-    def load_img(self, file_path) -> Image.Image:
+    def load_img(self, file_path: str) -> Image.Image:
         """Returns a PIL Image of the image located at `file_path`
 
         Parameters
@@ -144,5 +139,4 @@ class SRDataset(torch.utils.data.Dataset):
             Loaded image as PIL Image
 
         """
-
         return Image.open(file_path).convert(self.color_space)

@@ -3,7 +3,7 @@ import torch.nn.functional as F
 
 
 @torch.no_grad()
-def mse(y_pred, y_true):
+def mse(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
     """Mean squared error (MSE) metric
 
     Parameters
@@ -22,7 +22,7 @@ def mse(y_pred, y_true):
     return F.mse_loss(y_pred, y_true)
 
 @torch.no_grad()
-def mae(y_pred, y_true):
+def mae(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
     """Mean absolute error (MAE) metric
 
     Parameters
@@ -41,7 +41,7 @@ def mae(y_pred, y_true):
     return F.l1_loss(y_pred, y_true)
 
 @torch.no_grad()
-def psnr(y_pred, y_true):
+def psnr(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
     """Peak-signal-noise ratio (PSNR) metric
 
     Parameters

@@ -7,7 +7,15 @@ class Bicubic(Base):
     """Bicubic Interpolation Upsampling module
 
     """
-    def __init__(self, scale_factor):
+    def __init__(self, scale_factor: int):
+        """Constructor
+        
+        Parameters
+        ----------
+        scale_factor : int
+            Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
+        """
         super(Bicubic, self).__init__()
 
         self.model = nn.Sequential(
@@ -16,7 +24,7 @@ class Bicubic(Base):
 
         self.loss = nn.MSELoss()
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
         Parameters
