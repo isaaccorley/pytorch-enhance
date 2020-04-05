@@ -8,11 +8,11 @@ from .srresnet import SRResNet
 
 
 __all__ = [
-    'BaseModel'
+    'BaseModel',
     'Bicubic',
     'SRCNN',
     'VDSR',
-    'EDSR'
+    'EDSR',
     'ESPCN',
     'SRResNet'
 ]
