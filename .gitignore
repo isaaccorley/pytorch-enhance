@@ -10,7 +10,5 @@ build/*
 torch_enhance.egg-info/*
 .eggs/*
 .pytest_cache/
-lightning_logs/*
 examples/lightning_logs/*
 .vscode/*
-playground.py
