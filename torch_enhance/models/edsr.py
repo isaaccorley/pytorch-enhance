@@ -63,6 +63,10 @@ class ResidualBlock(nn.Module):
 
 
 class EDSR(Base):
+    """Enhanced Deep Residual Networks for Single Image Super-Resolution
+        https://arxiv.org/pdf/1707.02921v1.pdf
+        
+    """
     def __init__(self, scale_factor, pretrained=False):
         super(EDSR, self).__init__()
 
@@ -98,6 +102,19 @@ class EDSR(Base):
             self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
 
     def forward(self, x):
+        """Super-resolve Low-Resolution input tensor
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input Low-Resolution image as tensor
+
+        Returns
+        -------
+        torch.Tensor
+            Super-Resolved image as tensor
+
+        """
         x = self.head(x)
         shortcut = x
         x = self.res_blocks(x) + shortcut

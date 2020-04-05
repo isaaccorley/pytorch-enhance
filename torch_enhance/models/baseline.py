@@ -4,8 +4,8 @@ from .base import Base
 
 
 class Bicubic(Base):
-    """
-    Bicubic Interpolation Upsampling module
+    """Bicubic Interpolation Upsampling module
+
     """
     def __init__(self, scale_factor):
         super(Bicubic, self).__init__()
@@ -17,5 +17,18 @@ class Bicubic(Base):
         self.loss = nn.MSELoss()
 
     def forward(self, x):
+        """Super-resolve Low-Resolution input tensor
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input Low-Resolution image as tensor
+
+        Returns
+        -------
+        torch.Tensor
+            Super-Resolved image as tensor
+
+        """
         x = self.model(x)
         return x

@@ -7,9 +7,9 @@ WEIGHTS_URL = ""
 WEIGHTS_PATH = ""
 
 class SRCNN(Base):
-    """
-    Super-Resolution Convolutional Neural Network
-    https://arxiv.org/pdf/1501.00092v3.pdf
+    """Super-Resolution Convolutional Neural Network
+        https://arxiv.org/pdf/1501.00092v3.pdf
+        
     """
     def __init__(self, scale_factor, pretrained=False):
         super(SRCNN, self).__init__()
@@ -28,6 +28,19 @@ class SRCNN(Base):
             self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
 
     def forward(self, x):
+        """Super-resolve Low-Resolution input tensor
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input Low-Resolution image as tensor
+
+        Returns
+        -------
+        torch.Tensor
+            Super-Resolved image as tensor
+
+        """
         x = self.upsample(x)
         x = self.model(x)
         return x

@@ -64,9 +64,9 @@ class UpsampleBlock(nn.Module):
 
 
 class SRResNet(Base):
-    """
-    Super-Resolution Residual Neural Network
-    https://arxiv.org/pdf/1609.04802v5.pdf
+    """Super-Resolution Residual Neural Network
+        https://arxiv.org/pdf/1609.04802v5.pdf
+        
     """
     def __init__(self, scale_factor, pretrained=False):
 
@@ -108,6 +108,19 @@ class SRResNet(Base):
             self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
 
     def forward(self, x):
+        """Super-resolve Low-Resolution input tensor
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input Low-Resolution image as tensor
+
+        Returns
+        -------
+        torch.Tensor
+            Super-Resolved image as tensor
+
+        """
         x = self.head(x)
         shortcut = x
         x = self.res_blocks(x) + shortcut

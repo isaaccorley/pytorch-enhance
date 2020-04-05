@@ -160,19 +160,61 @@
 <dl class="function">
 <dt id="torch_enhance.metrics.mae">
 <code class="sig-prename descclassname">torch_enhance.metrics.</code><code class="sig-name descname">mae</code><span class="sig-paren">(</span><em class="sig-param">y_pred</em>, <em class="sig-param">y_true</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torch_enhance/metrics.html#mae"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch_enhance.metrics.mae" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mean absolute error metric</p>
+<dd><p>Mean absolute error (MAE) metric</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>torch.Tensor</em>) – Super-Resolved image tensor</p></li>
+<li><p><strong>y_true</strong> (<em>torch.Tensor</em>) – High Resolution image tensor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mean absolute error between y_true and y_pred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="torch_enhance.metrics.mse">
 <code class="sig-prename descclassname">torch_enhance.metrics.</code><code class="sig-name descname">mse</code><span class="sig-paren">(</span><em class="sig-param">y_pred</em>, <em class="sig-param">y_true</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torch_enhance/metrics.html#mse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch_enhance.metrics.mse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Mean squared error metric</p>
+<dd><p>Mean squared error (MSE) metric</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>torch.Tensor</em>) – Super-Resolved image tensor</p></li>
+<li><p><strong>y_true</strong> (<em>torch.Tensor</em>) – High Resolution image tensor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Mean squared error between y_true and y_pred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="torch_enhance.metrics.psnr">
 <code class="sig-prename descclassname">torch_enhance.metrics.</code><code class="sig-name descname">psnr</code><span class="sig-paren">(</span><em class="sig-param">y_pred</em>, <em class="sig-param">y_true</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torch_enhance/metrics.html#psnr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch_enhance.metrics.psnr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Peak-signal-noise ratio metric</p>
+<dd><p>Peak-signal-noise ratio (PSNR) metric</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_pred</strong> (<em>torch.Tensor</em>) – Super-Resolved image tensor</p></li>
+<li><p><strong>y_true</strong> (<em>torch.Tensor</em>) – High Resolution image tensor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Peak-signal-noise-ratio between y_true and y_pred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

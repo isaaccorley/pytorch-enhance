@@ -8,9 +8,9 @@ WEIGHTS_PATH = ""
 
 
 class VDSR(Base):
-    """
-    Very Deep Super Resolution
-    https://arxiv.org/pdf/1511.04587.pdf
+    """Very Deep Super Resolution
+        https://arxiv.org/pdf/1511.04587.pdf
+
     """
     def __init__(self, scale_factor, pretrained=False):
         super(VDSR, self).__init__()
@@ -38,6 +38,19 @@ class VDSR(Base):
             self.load_pretrained(WEIGHTS_URL, WEIGHTS_PATH)
 
     def forward(self, x):
+        """Super-resolve Low-Resolution input tensor
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input Low-Resolution image as tensor
+
+        Returns
+        -------
+        torch.Tensor
+            Super-Resolved image as tensor
+
+        """
         x = self.upsample(x)
         x = self.model(x) + x
         return x

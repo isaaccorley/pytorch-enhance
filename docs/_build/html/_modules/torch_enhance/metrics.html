@@ -158,17 +158,59 @@
 
 <div class="viewcode-block" id="mse"><a class="viewcode-back" href="../../source/metrics.html#torch_enhance.metrics.mse">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Mean squared error metric &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Mean squared error (MSE) metric</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y_pred : torch.Tensor</span>
+<span class="sd">        Super-Resolved image tensor</span>
+<span class="sd">    y_true : torch.Tensor</span>
+<span class="sd">        High Resolution image tensor</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    torch.Tensor</span>
+<span class="sd">        Mean squared error between y_true and y_pred</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="mae"><a class="viewcode-back" href="../../source/metrics.html#torch_enhance.metrics.mae">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">mae</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Mean absolute error metric &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Mean absolute error (MAE) metric</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y_pred : torch.Tensor</span>
+<span class="sd">        Super-Resolved image tensor</span>
+<span class="sd">    y_true : torch.Tensor</span>
+<span class="sd">        High Resolution image tensor</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    torch.Tensor</span>
+<span class="sd">        Mean absolute error between y_true and y_pred</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">l1_loss</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="psnr"><a class="viewcode-back" href="../../source/metrics.html#torch_enhance.metrics.psnr">[docs]</a><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">psnr</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Peak-signal-noise ratio metric &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Peak-signal-noise ratio (PSNR) metric</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    y_pred : torch.Tensor</span>
+<span class="sd">        Super-Resolved image tensor</span>
+<span class="sd">    y_true : torch.Tensor</span>
+<span class="sd">        High Resolution image tensor</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    torch.Tensor</span>
+<span class="sd">        Peak-signal-noise-ratio between y_true and y_pred</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span><span class="p">))</span><span class="o">.</span><span class="n">log10</span><span class="p">()</span></div>
 </pre></div>
 

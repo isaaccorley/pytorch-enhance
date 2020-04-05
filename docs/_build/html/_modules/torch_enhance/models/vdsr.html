@@ -162,9 +162,9 @@
 
 
 <div class="viewcode-block" id="VDSR"><a class="viewcode-back" href="../../../source/models.html#torch_enhance.models.VDSR">[docs]</a><span class="k">class</span> <span class="nc">VDSR</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Very Deep Super Resolution</span>
-<span class="sd">    https://arxiv.org/pdf/1511.04587.pdf</span>
+    <span class="sd">&quot;&quot;&quot;Very Deep Super Resolution</span>
+<span class="sd">        https://arxiv.org/pdf/1511.04587.pdf</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">VDSR</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -192,6 +192,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">load_pretrained</span><span class="p">(</span><span class="n">WEIGHTS_URL</span><span class="p">,</span> <span class="n">WEIGHTS_PATH</span><span class="p">)</span>
 
 <div class="viewcode-block" id="VDSR.forward"><a class="viewcode-back" href="../../../source/models.html#torch_enhance.models.VDSR.forward">[docs]</a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Super-resolve Low-Resolution input tensor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : torch.Tensor</span>
+<span class="sd">            Input Low-Resolution image as tensor</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        torch.Tensor</span>
+<span class="sd">            Super-Resolved image as tensor</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
         <span class="k">return</span> <span class="n">x</span></div></div>
