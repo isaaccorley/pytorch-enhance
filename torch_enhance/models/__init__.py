@@ -1,3 +1,4 @@
+from .base import Base
 from .baseline import Bicubic
 from .srcnn import SRCNN
 from .edsr import EDSR

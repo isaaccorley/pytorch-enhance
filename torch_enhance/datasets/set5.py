@@ -1,10 +1,10 @@
 import os
 
-from .common import SET5_URL, SRDataset
+from .common import SET5_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 
-class Set5(SRDataset):
+class Set5(BaseDataset):
 
     url = SET5_URL
     extensions = ['.png']

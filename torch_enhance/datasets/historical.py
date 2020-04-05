@@ -1,10 +1,10 @@
 import os
 
-from .common import HISTORICAL_URL, SRDataset
+from .common import HISTORICAL_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 
-class Historical(SRDataset):
+class Historical(BaseDataset):
 
     url = HISTORICAL_URL
     extensions = ['.png']

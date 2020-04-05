@@ -16,7 +16,7 @@ DIV2K_TRAIN_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip"
 DIV2K_TEST_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip"
 
 
-class SRDataset(torch.utils.data.Dataset):
+class BaseDataset(torch.utils.data.Dataset):
     """Base Super Resolution Dataset Class
 
     """

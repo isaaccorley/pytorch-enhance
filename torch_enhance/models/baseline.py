@@ -7,16 +7,14 @@ from .base import Base
 class Bicubic(Base):
     """Bicubic Interpolation Upsampling module
 
+    Parameters
+    ----------
+    scale_factor : int
+        Super-Resolution scale factor. Determines Low-Resolution downsampling.
+
     """
     def __init__(self, scale_factor: int):
-        """Constructor
-        
-        Parameters
-        ----------
-        scale_factor : int
-            Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
-        """
         super(Bicubic, self).__init__()
 
         self.model = nn.Sequential(

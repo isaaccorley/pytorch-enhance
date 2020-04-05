@@ -13,3 +13,6 @@ torch_enhance.egg-info/*
 .pytest_cache/
 examples/lightning_logs/*
 .vscode/*
+docs/_build/*
+docs/_templates/*
+docs/_static/*

@@ -1,3 +1,4 @@
+from .common import BaseDataset
 from .bsds300 import BSDS300
 from .bsds500 import BSDS500
 from .set5 import Set5

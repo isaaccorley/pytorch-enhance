@@ -1,11 +1,11 @@
 import os
 import shutil
 
-from .common import BSDS500_URL, SRDataset
+from .common import BSDS500_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 
-class BSDS500(SRDataset):
+class BSDS500(BaseDataset):
 
     url = BSDS500_URL
     extensions = ['.jpg']

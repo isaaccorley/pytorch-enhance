@@ -1,10 +1,10 @@
 import os
 
-from .common import T91_URL, SRDataset
+from .common import T91_URL, BaseDataset
 from torchvision.datasets.utils import download_and_extract_archive
 
 
-class T91(SRDataset):
+class T91(BaseDataset):
 
     url = T91_URL
     extensions = ['.png']
