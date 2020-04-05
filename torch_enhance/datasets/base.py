@@ -21,7 +21,7 @@ class BaseDataset(torch.utils.data.Dataset):
 
     """
     def __init__(self):
-        super(SRDataset, self).__init__()
+        super(BaseDataset, self).__init__()
 
         self.base_dir = '.data'
         self.color_space = 'RGB'

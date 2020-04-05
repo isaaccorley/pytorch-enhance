@@ -7,7 +7,7 @@ from torchvision.datasets.utils import download_and_extract_archive
 
 MODELS_PATH = '.models'
 
-class Base(nn.Module):
+class BaseModel(nn.Module):
     """Base Super-Resolution module
     
     """

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .base import Base
+from .base import BaseModel
 
 
 class UpsampleBlock(nn.Module):
@@ -61,7 +61,7 @@ class ResidualBlock(nn.Module):
         return x
 
 
-class EDSR(Base):
+class EDSR(BaseModel):
     """Enhanced Deep Residual Networks for Single Image Super-Resolution
     https://arxiv.org/pdf/1707.02921v1.pdf
     

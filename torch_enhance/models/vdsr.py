@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
 
-from .base import Base
+from .base import BaseModel
 from .baseline import Bicubic
 
 
-class VDSR(Base):
+class VDSR(BaseModel):
     """Very Deep Super Resolution
     https://arxiv.org/pdf/1511.04587.pdf
     

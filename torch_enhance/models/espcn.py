@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
 
-from .base import Base
+from .base import BaseModel
 
 
-class ESPCN(Base):
+class ESPCN(BaseModel):
     """Efficient Sub-Pixel Convolutional Neural Network
     https://arxiv.org/pdf/1609.05158v2.pdf
 

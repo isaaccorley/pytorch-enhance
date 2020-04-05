@@ -1,4 +1,4 @@
-from .base import Base
+from .base import BaseModel
 from .baseline import Bicubic
 from .srcnn import SRCNN
 from .edsr import EDSR
@@ -8,6 +8,7 @@ from .srresnet import SRResNet
 
 
 __all__ = [
+    'BaseModel'
     'Bicubic',
     'SRCNN',
     'VDSR',

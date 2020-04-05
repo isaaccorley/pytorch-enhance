@@ -1,11 +1,11 @@
 import torch
 import torch.nn as nn
 
-from .base import Base
+from .base import BaseModel
 from .baseline import Bicubic
 
 
-class SRCNN(Base):
+class SRCNN(BaseModel):
     """Super-Resolution Convolutional Neural Network
     https://arxiv.org/pdf/1501.00092v3.pdf
     

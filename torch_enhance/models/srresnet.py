@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .base import Base
+from .base import BaseModel
 
 
 class ResidualBlock(nn.Module):
@@ -60,7 +60,7 @@ class UpsampleBlock(nn.Module):
         return x
 
 
-class SRResNet(Base):
+class SRResNet(BaseModel):
     """Super-Resolution Residual Neural Network
     https://arxiv.org/pdf/1609.04802v5.pdf
 
