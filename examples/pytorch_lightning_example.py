@@ -1,25 +1,49 @@
+import sys
+sys.path.append("..")
+
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from torch.utils.data import DataLoader
+
 import pytorch_lightning as pl
 
-from torch_enhance.datasets import BSDS300, Set5
+from torch_enhance.datasets import BSDS300, Set14, Set5
 from torch_enhance.models import SRCNN
 from torch_enhance import metrics
 
 
-class Enhance(pl.LightningModule):
-    def __init__(self, model, dataset, scale_factor, test_set=None):
-        super(Enhance, self).__init__()
+class LitSystem(pl.LightningModule):
+
+    def __init__(
+        self,
+        model,
+        train_dataset,
+        val_dataset,
+        test_dataset
+    ):
+        super().__init__()
         self.model = model
-        self.dataset = dataset
-        self.scale_factor = scale_factor
-        self.test_set = test_set
+        self.train_dataset = train_dataset
+        self.val_dataset = val_dataset
+        self.test_dataset = test_dataset
         self.loss = self.model.loss
 
     def forward(self, x):
         return self.model(x)
+
+    def configure_optimizers(self):
+        return [torch.optim.Adam(self.parameters(), lr=1e-3)]
+
+    @pl.data_loader
+    def train_dataloader(self):
+        return DataLoader(self.train_dataset, batch_size=8)
+
+    @pl.data_loader
+    def val_dataloader(self):
+        return DataLoader(self.val_dataset, batch_size=1)
+
+    @pl.data_loader
+    def test_dataloader(self):
+        return DataLoader(self.test_dataset, batch_size=1)
 
     def training_step(self, batch, batch_idx):
         lr, hr = batch
@@ -75,32 +99,22 @@ class Enhance(pl.LightningModule):
             }
         return {'avg_test_loss': avg_loss, 'log': tensorboard_logs}
 
-    def configure_optimizers(self):
-        return [torch.optim.Adam(self.parameters(), lr=1e-3)]
 
-    @pl.data_loader
-    def train_dataloader(self):
-        return DataLoader(self.dataset.get_dataset(train=True), batch_size=2)
-
-    @pl.data_loader
-    def val_dataloader(self):
-        return DataLoader(self.dataset.get_dataset(train=False), batch_size=2)
-
-    @pl.data_loader
-    def test_dataloader(self):
-        if self.test_set is None:
-            return DataLoader(self.dataset.get_dataset(train=False), batch_size=2)
-        else:
-            return DataLoader(self.test_set.get_dataset(), batch_size=1)
-
-
-
-if __name__ = '__main__':
+if __name__ == '__main__':
     scale_factor = 2
-    data = BSDS300(scale_factor)
-    test_set = Set5(scale_factor)
+    train_dataset = BSDS300(scale_factor=scale_factor, data_dir="../.data/")
+    val_dataset = Set14(scale_factor=scale_factor, data_dir="../.data/")
+    test_dataset = Set5(scale_factor=scale_factor, data_dir="../.data/")
     model = SRCNN(scale_factor)
-    module = Enhance(model, data, scale_factor, test_set)
-    trainer = pl.Trainer(max_nb_epochs=1, train_percent_check=0.1, val_percent_check=0.1)
+    module = LitSystem(
+        model,
+        train_dataset,
+        val_dataset,
+        test_dataset
+    )
+    trainer = pl.Trainer(
+        max_nb_epochs=2,
+        gpus=1
+    )
     trainer.fit(module)
     trainer.test()
