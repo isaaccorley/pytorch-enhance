@@ -104,7 +104,7 @@ Please cite this repository if you used this code in your own work:
 ```
 @software{isaac_corley_2020_3739368,
   author       = {Isaac Corley},
-  title        = {IsaacCorley/pytorch-enhance: First alpha release},
+  title        = {PyTorch Enhance},
   month        = apr,
   year         = 2020,
   publisher    = {Zenodo},
