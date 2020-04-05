@@ -46,6 +46,8 @@ class ResidualBlock(nn.Module):
 
         super(ResidualBlock, self).__init__()
 
+        self.res_scale = res_scale
+        
         self.model = nn.Sequential(
             nn.Conv2d(in_channels=channels, out_channels=channels, kernel_size=kernel_size, stride=1, padding=kernel_size//2),
             activation(),

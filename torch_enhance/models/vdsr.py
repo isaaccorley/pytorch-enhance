@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 
 from .base import Base
@@ -30,7 +31,7 @@ class VDSR(Base):
         ]
 
         # Residual reconstruction
-        for i in range(n_layers - 2):
+        for i in range(self.n_layers - 2):
             layers.append(nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1))
             layers.append(nn.ReLU())
 

@@ -89,10 +89,10 @@ class SRResNet(Base):
             ResidualBlock(channels=64, kernel_size=3, activation=nn.PReLU) \
             for _ in range(self.n_res_blocks)
             ]
-        self.res_blocks = nn.Sequential(*self.res_blocks)
         self.res_blocks.append(nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1))
         self.res_blocks.append(nn.BatchNorm2d(num_features=64))
-
+        self.res_blocks = nn.Sequential(*self.res_blocks)
+        
         # Upsamples
         n_upsamples = 1 if scale_factor == 2 else 2
         self.upsample = UpsampleBlock(

@@ -11,8 +11,7 @@ class Base(nn.Module):
     """Base Super-Resolution module
     
     """
-    def __init__(self):
-        self.loss = nn.MSELoss()
+    loss = nn.MSELoss()
 
     def load_pretrained(self, weights_url: str, weights_path: str) -> None:
         """Download pretrained weights and load as state dict
