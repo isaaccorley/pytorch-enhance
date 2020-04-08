@@ -1,9 +1,14 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3739368.svg)](https://doi.org/10.5281/zenodo.3739368)
+![](assets/pytorch-enhance-logo-cropped.png)
 
 # pytorch-enhance: Image Super-Resolution in PyTorch
+[[![License: Apache 2.0](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)](https://img.shields.io/github/license/IsaacCorley/pytorch-enhance?style=plastic)
+[![PyPI version](https://badge.fury.io/py/torch-enhance.svg)](https://badge.fury.io/py/torch-enhance)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/torch-enhance?style=plastic)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3739368.svg)](https://doi.org/10.5281/zenodo.3739368)
+
 Library for Minimal Modern Image Super-Resolution in PyTorch
 
-![](assets/pytorch-enhance-logo-cropped.png)
+
 --------------------------------------------------------------------------------
 PyTorch Enhance provides a consolidated package of popular Image Super-Resolution models, datasets, and metrics to allow for quick and painless benchmarking or for quickly adding pretrained models to your application.
 
