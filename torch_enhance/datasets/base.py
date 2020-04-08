@@ -4,16 +4,22 @@ from typing import List, Tuple
 
 import torch
 from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
+from torchvision.datasets.utils import download_file_from_google_drive, extract_archive
 
 
-BSDS300_URL = "http://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/BSDS300-images.tgz"
-BSDS500_URL = "http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz"
-SET5_URL = "https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/Set5.zip"
-SET14_URL = "https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/Set14.zip"
-T91_URL = "https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/T91.zip"
-HISTORICAL_URL = "https://raw.github.com/IsaacCorley/pytorch-enhance/master/datasets/historical.zip"
 DIV2K_TRAIN_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip"
 DIV2K_TEST_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip"
+BSDS300_URL = "http://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/BSDS300-images.tgz"
+BSDS500_URL = "http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz"
+BSDS100_URL = "1nu78kEKoSTti7ynh8pdxa7ae7TvZiNOy"
+BSDS200_URL = "1N9cK1OScGrACUgCms0f2rFlUOHhgkW0l"
+SET5_URL = "14g2glfOdkxzZ2RnQZR6jYU5CoClsxQRo"
+SET14_URL = "1FSJqQVISh19onL1TUqPNor0uRyp8LlNb"
+T91_URL = "1VSG1e5nvdV9UCUSYuaKecNFuk3OPUat4"
+HISTORICAL_URL = "1sc14tdRslyZsfw1-LpoOCKF72kSWKedx"
+MANGA109_URL = "1bEjcSRiT4V6vxjHjhr_jBPmAr3sGS_5l"
+URBAN100_URL = "1svYMEyfc5mkpnW6JnkF0ZS_KetgEYgLR"
+GENERAL100_URL = "1tD6XBLkV9Qteo2obMRcRueTRwie7Hqae"
 
 
 class BaseDataset(torch.utils.data.Dataset):
@@ -140,3 +146,34 @@ class BaseDataset(torch.utils.data.Dataset):
 
         """
         return Image.open(file_path).convert(self.color_space)
+
+    def download_google_drive(self, data_dir: str, filename: str) -> None:
+        """Download dataset
+
+        Parameters
+        ----------
+        data_dir : str
+            Path to base dataset directory
+        filename : str
+            Filename of google drive file being downloaded
+
+        Returns
+        -------
+        None
+
+        """
+        if not os.path.exists(data_dir):
+            os.mkdir(data_dir)
+
+        if not os.path.exists(self.root_dir):
+
+            download_file_from_google_drive(
+                file_id=self.url,
+                root=data_dir,
+                filename=filename
+            )
+            extract_archive(
+                from_path=os.path.join(data_dir, filename),
+                to_path=data_dir,
+                remove_finished=True
+            )

@@ -50,19 +50,18 @@ The following benchmark datasets are available for usage:
 
 * **[BSDS300](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)**
 * **[BSDS500](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html)**
-* **[Set5](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[Set14](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[T91](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[Historical](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-
+* **[Set5](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[Set14](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[T91](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[Historical](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[Urban100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[Manga109](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[General100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[BSDS100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[BSDS200](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 
 TODO
 
-* **[Urban100](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[Manga109](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[General100](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[BSDS100](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
-* **[BSDS200](https://github.com/xinntao/BasicSR/wiki/Prepare-datasets-in-LMDB-format)**
 * **[DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)**
 
 
@@ -76,6 +75,9 @@ TODO
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](assets/Set5.gif)  |  ![](assets/Set14.gif)          | ![](assets/Historical.gif) 
 
+## Losses
+
+* **VGG/Perceptual Loss**
 
 ## Metrics
 
@@ -95,8 +97,8 @@ TODO
 $ cd examples
 ```
 
-* **[Get up and benchmarking quickly with PyTorch Lightning](examples/pytorch_lightning_srcnn.py)**
-
+* **[Get up and benchmarking quickly with PyTorch Lightning](examples/pytorch_lightning_example.py)**
+* **[Coming from Keras? Try our example using the Poutyne library](examples/poutyne_example.py)**
 
 ## Running Tests
 
@@ -115,7 +117,7 @@ Please cite this repository if you used this code in your own work:
   month        = apr,
   year         = 2020,
   publisher    = {Zenodo},
-  version      = {0.1.1},
+  version      = {0.1.2},
   doi          = {10.5281/zenodo.3739368},
   url          = {https://doi.org/10.5281/zenodo.3739368}
 }

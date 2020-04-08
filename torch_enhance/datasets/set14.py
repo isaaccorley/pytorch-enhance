@@ -1,7 +1,6 @@
 import os
 
 from .base import SET14_URL, BaseDataset
-from torchvision.datasets.utils import download_and_extract_archive
 
 
 class Set14(BaseDataset):
@@ -30,31 +29,10 @@ class Set14(BaseDataset):
             data_dir = os.path.join(os.getcwd(), self.base_dir)
 
         self.root_dir = os.path.join(data_dir, 'Set14')
-        self.download(data_dir)
+        self.download_google_drive(data_dir, filename="Set14.zip")
         self.file_names = self.get_files(self.root_dir)
 
         if self.lr_transforms is None:
             self.lr_transform = self.get_lr_transforms()
         if self.hr_transforms is None:
             self.hr_transform = self.get_hr_transforms()
-
-    def download(self, data_dir: str) -> None:
-        """Download dataset
-
-        Parameters
-        ----------
-        data_dir : str
-            Path to base dataset directory
-
-        Returns
-        -------
-        None
-
-        """
-        if not os.path.exists(data_dir):
-            os.mkdir(data_dir)
-
-        if not os.path.exists(self.root_dir):
-            os.makedirs(self.root_dir)
-
-            download_and_extract_archive(self.url, data_dir, remove_finished=True)
