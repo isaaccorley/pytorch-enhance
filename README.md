@@ -1,10 +1,10 @@
 ![](assets/pytorch-enhance-logo-cropped.png)
 
 # pytorch-enhance: Image Super-Resolution in PyTorch
-[[![License: Apache 2.0](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](http://www.gnu.org/licenses/lgpl-3.0)](https://img.shields.io/github/license/IsaacCorley/pytorch-enhance?style=plastic)
-![Travis (.com)](https://img.shields.io/travis/com/IsaacCorley/pytorch-enhance?style=plastic)
 [![PyPI version](https://badge.fury.io/py/torch-enhance.svg)](https://badge.fury.io/py/torch-enhance)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/torch-enhance?style=plastic)
+![GitHub](https://img.shields.io/github/license/IsaacCorley/pytorch-enhance?style=plastic)
+![Travis (.com)](https://img.shields.io/travis/com/IsaacCorley/pytorch-enhance?style=plastic)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3739368.svg)](https://doi.org/10.5281/zenodo.3739368)
 
 Library for Minimal Modern Image Super-Resolution in PyTorch
