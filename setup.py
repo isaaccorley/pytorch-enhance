@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = "0.1.2"
+__version__ = "0.1.4"
 url = "https://github.com/IsaacCorley/pytorch_enhance"
 
 with open("requirements.txt", "r") as f:
