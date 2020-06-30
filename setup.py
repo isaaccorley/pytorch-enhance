@@ -13,7 +13,7 @@ tests_require = ['pytest', 'pytest-cov', 'mock']
 
 setup(
     name='torch_enhance',
-    packages=['torch_enhance'],
+    packages=find_packages(),
     version=__version__,
     license='Apache License 2.0',
     description='Image Super-Resolution Library for PyTorch',
