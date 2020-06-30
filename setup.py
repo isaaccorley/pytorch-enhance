@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-__version__ = "0.1.4"
-url = "https://github.com/IsaacCorley/pytorch_enhance"
+__version__ = "0.1.3"
+url = "https://github.com/IsaacCorley/pytorch-enhance"
 
 with open("requirements.txt", "r") as f:
     install_requires = f.read().strip().splitlines()
