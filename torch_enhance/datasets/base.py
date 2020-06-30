@@ -1,10 +1,14 @@
 import os
-from PIL import Image
 from typing import List, Tuple
 
 import torch
-from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
-from torchvision.datasets.utils import download_file_from_google_drive, extract_archive
+import torchvision.transforms as T
+from torchvision.transforms import Compose, ToTensor, Resize
+from torchvision.datasets.utils import (
+    download_file_from_google_drive,
+    extract_archive
+)
+from PIL import Image
 
 
 DIV2K_TRAIN_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip"
@@ -26,31 +30,33 @@ class BaseDataset(torch.utils.data.Dataset):
     """Base Super Resolution Dataset Class
 
     """
-    def __init__(self):
-        super(BaseDataset, self).__init__()
 
-        self.base_dir = '.data'
-        self.color_space = 'RGB'
-        self.extensions = ['']
-        self.lr_transform = None
-        self.hr_transform = None
+    base_dir: str = ".data"
+    color_space: str = "RGB"
+    extensions: List[str] = [""]
+    lr_transform: T.Compose = None
+    hr_transform: T.Compose = None
 
     def get_lr_transforms(self):
         """Returns HR to LR image transformations
-        
+
         """
         return Compose(
             [
-                Resize((self.image_size//self.scale_factor,
-                        self.image_size//self.scale_factor),
-                        Image.BICUBIC),
+                Resize(
+                    (
+                        self.image_size//self.scale_factor,
+                        self.image_size//self.scale_factor
+                    ),
+                    Image.BICUBIC
+                ),
                 ToTensor(),
             ]
         )
 
     def get_hr_transforms(self):
         """Returns HR image transformations
-        
+
         """
         return Compose(
             [
@@ -58,7 +64,7 @@ class BaseDataset(torch.utils.data.Dataset):
                 ToTensor(),
             ]
         )
-        
+
     def get_files(self, root_dir: str) -> List[str]:
         """Returns  a list of valid image files in a directory
 
@@ -116,7 +122,7 @@ class BaseDataset(torch.utils.data.Dataset):
         return len(self.file_names)
 
     def is_valid_file(self, file_path: str) -> bool:
-        """Returns boolean if the given `file_path` has a valid image extension 
+        """Returns boolean if the given `file_path` has a valid image extension
 
         Parameters
         ----------

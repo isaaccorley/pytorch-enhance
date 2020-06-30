@@ -12,16 +12,16 @@ from .manga109 import Manga109
 from .general100 import General100
 
 __all__ = [
-    'BaseDataset',
-    'BSDS300',
-    'BSDS500',
-    'BSDS200',
-    'BSDS100',
-    'Set5',
-    'Set14',
-    'T91',
-    'Historical',
-    'Urban100',
-    'Manga109',
-    'General100'
+    "BaseDataset",
+    "BSDS300",
+    "BSDS500",
+    "BSDS200",
+    "BSDS100",
+    "Set5",
+    "Set14",
+    "T91",
+    "Historical",
+    "Urban100",
+    "Manga109",
+    "General100"
 ]

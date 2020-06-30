@@ -5,17 +5,18 @@ import torch.nn as nn
 from torchvision.datasets.utils import download_and_extract_archive
 
 
-MODELS_PATH = '.models'
+MODELS_PATH = ".models"
+
 
 class BaseModel(nn.Module):
     """Base Super-Resolution module
-    
+
     """
     loss = nn.MSELoss()
 
     def load_pretrained(self, weights_url: str, weights_path: str) -> None:
         """Download pretrained weights and load as state dict
-        
+
         Parameters
         ----------
         weights_url : str
@@ -38,7 +39,7 @@ class BaseModel(nn.Module):
     @staticmethod
     def download(url: str, weights_path: str) -> None:
         """Download pretrained weights
-        
+
         Parameters
         ----------
         weights_path : str
@@ -60,7 +61,7 @@ class BaseModel(nn.Module):
 
     def normalize01(self, x: torch.Tensor) -> torch.Tensor:
         """Normalize from [0, 255] -> [0, 1]
-        
+
         Parameters
         ----------
         x : torch.Tensor

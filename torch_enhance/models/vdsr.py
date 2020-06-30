@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 from .base import BaseModel
@@ -8,12 +7,12 @@ from .baseline import Bicubic
 class VDSR(BaseModel):
     """Very Deep Super Resolution
     https://arxiv.org/pdf/1511.04587.pdf
-    
+
     Parameters
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-        
+
     """
     def __init__(self, scale_factor):
 
@@ -24,17 +23,35 @@ class VDSR(BaseModel):
 
         # Initial layer
         layers = [
-            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1),
+            nn.Conv2d(
+                in_channels=3,
+                out_channels=64,
+                kernel_size=3,
+                stride=1,
+                padding=1
+            ),
             nn.ReLU(),
         ]
 
         # Residual reconstruction
         for i in range(self.n_layers - 2):
-            layers.append(nn.Conv2d(in_channels=64, out_channels=64, kernel_size=3, stride=1, padding=1))
+            layers.append(nn.Conv2d(
+                in_channels=64,
+                out_channels=64,
+                kernel_size=3,
+                stride=1,
+                padding=1
+            ))
             layers.append(nn.ReLU())
 
         # Output reconstruction layer
-        layers.append(nn.Conv2d(in_channels=64, out_channels=3, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(
+            in_channels=64,
+            out_channels=3,
+            kernel_size=3,
+            stride=1,
+            padding=1
+        ))
 
         self.model = nn.Sequential(*layers)
 

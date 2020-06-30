@@ -8,7 +8,7 @@ from .baseline import Bicubic
 class SRCNN(BaseModel):
     """Super-Resolution Convolutional Neural Network
     https://arxiv.org/pdf/1501.00092v3.pdf
-    
+
     Parameters
     ----------
     scale_factor : int
@@ -20,13 +20,31 @@ class SRCNN(BaseModel):
         super(SRCNN, self).__init__()
 
         self.upsample = Bicubic(scale_factor)
-        
+
         self.model = nn.Sequential(
-            nn.Conv2d(in_channels=3, out_channels=64, kernel_size=9, stride=1, padding=4),
+            nn.Conv2d(
+                in_channels=3,
+                out_channels=64,
+                kernel_size=9,
+                stride=1,
+                padding=4
+            ),
             nn.ReLU(),
-            nn.Conv2d(in_channels=64, out_channels=32, kernel_size=1, stride=1, padding=0),
+            nn.Conv2d(
+                in_channels=64,
+                out_channels=32,
+                kernel_size=1,
+                stride=1,
+                padding=0
+            ),
             nn.ReLU(),
-            nn.Conv2d(in_channels=32, out_channels=3, kernel_size=5, stride=1, padding=2)
+            nn.Conv2d(
+                in_channels=32,
+                out_channels=3,
+                kernel_size=5,
+                stride=1,
+                padding=2
+            )
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

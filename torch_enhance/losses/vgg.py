@@ -6,22 +6,22 @@ import torchvision
 
 class VGG(nn.Module):
     """VGG/Perceptual Loss
-    
+
     Parameters
     ----------
     conv_index : str
         Convolutional layer in VGG model to use as perceptual output
 
     """
-    def __init__(self, conv_index: str = '22'):
+    def __init__(self, conv_index: str = "22"):
 
         super(VGG, self).__init__()
         vgg_features = torchvision.models.vgg19(pretrained=True).features
         modules = [m for m in vgg_features]
-        
-        if conv_index == '22':
+
+        if conv_index == "22":
             self.vgg = nn.Sequential(*modules[:8])
-        elif conv_index == '54':
+        elif conv_index == "54":
             self.vgg = nn.Sequential(*modules[:35])
 
         vgg_mean = (0.485, 0.456, 0.406)
@@ -49,7 +49,7 @@ class VGG(nn.Module):
             #x = self.sub_mean(x)
             x = self.vgg(x)
             return x
-            
+
         vgg_sr = _forward(sr)
 
         with torch.no_grad():

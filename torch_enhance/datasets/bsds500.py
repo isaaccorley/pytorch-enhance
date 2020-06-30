@@ -1,39 +1,34 @@
 import os
 import shutil
+from dataclasses import dataclass
+
+import torchvision.transforms as T
 from torchvision.datasets.utils import download_and_extract_archive
 
 from .base import BSDS500_URL, BaseDataset
 
 
+@dataclass()
 class BSDS500(BaseDataset):
 
-    url = BSDS500_URL
-    extensions = ['.jpg']
+    scale_factor: int = 2
+    image_size: int = 256
+    color_space: str = "RGB"
+    set_type: str = "train"
+    data_dir: str = ""
+    lr_transforms: T.Compose = None
+    hr_transforms: T.Compose = None
 
-    def __init__(
-        self,
-        scale_factor: int = 2,
-        image_size: int = 256,
-        color_space: str = 'RGB',
-        set_type: str = 'train',
-        data_dir: str = '',
-        lr_transforms=None,
-        hr_transforms=None
-    ):
-        super(BSDS500, self).__init__()
-        
-        self.scale_factor = scale_factor
-        self.image_size = image_size
-        self.color_space = color_space
-        self.lr_transforms = lr_transforms
-        self.hr_transforms = hr_transforms
+    def __post_init__(self):
+        self.url = BSDS500_URL
+        self.extensions = [".jpg"]
 
-        if data_dir == '':
-            data_dir = os.path.join(os.getcwd(), self.base_dir)
+        if self.data_dir == "":
+            self.data_dir = os.path.join(os.getcwd(), self.base_dir)
 
-        self.root_dir = os.path.join(data_dir, 'BSDS500')
-        self.download(data_dir)
-        self.set_dir = os.path.join(self.root_dir, set_type)
+        self.root_dir = os.path.join(self.data_dir, "BSDS500")
+        self.download(self.data_dir)
+        self.set_dir = os.path.join(self.root_dir, self.set_type)
         self.file_names = self.get_files(self.set_dir)
 
         if self.lr_transforms is None:
@@ -59,13 +54,19 @@ class BSDS500(BaseDataset):
 
         if not os.path.exists(self.root_dir):
             os.makedirs(self.root_dir)
-            
-            download_and_extract_archive(self.url, data_dir, remove_finished=True)
+
+            download_and_extract_archive(
+                self.url,
+                data_dir,
+                remove_finished=True
+            )
 
             # Tidy up
             for d in ['train', 'val', 'test']:
-                shutil.move(src=os.path.join(data_dir, 'BSR/BSDS500/data/images', d),
-                            dst=self.root_dir)
+                shutil.move(
+                    src=os.path.join(data_dir, 'BSR/BSDS500/data/images', d),
+                    dst=self.root_dir
+                )
                 os.remove(os.path.join(self.root_dir, d, 'Thumbs.db'))
-                
+
             shutil.rmtree(os.path.join(data_dir, 'BSR'))

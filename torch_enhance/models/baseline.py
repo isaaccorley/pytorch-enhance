@@ -18,7 +18,11 @@ class Bicubic(BaseModel):
         super(Bicubic, self).__init__()
 
         self.model = nn.Sequential(
-            nn.Upsample(scale_factor=scale_factor, mode='bicubic', align_corners=False)
+            nn.Upsample(
+                scale_factor=scale_factor,
+                mode="bicubic",
+                align_corners=False
+            )
         )
 
         self.loss = nn.MSELoss()

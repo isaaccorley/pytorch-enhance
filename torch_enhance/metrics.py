@@ -21,6 +21,7 @@ def mse(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
     """
     return F.mse_loss(y_pred, y_true)
 
+
 @torch.no_grad()
 def mae(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
     """Mean absolute error (MAE) metric
@@ -39,6 +40,7 @@ def mae(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
 
     """
     return F.l1_loss(y_pred, y_true)
+
 
 @torch.no_grad()
 def psnr(y_pred: torch.Tensor, y_true: torch.Tensor) -> torch.Tensor:
