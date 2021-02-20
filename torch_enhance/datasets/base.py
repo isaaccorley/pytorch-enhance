@@ -41,29 +41,24 @@ class BaseDataset(torch.utils.data.Dataset):
         """Returns HR to LR image transformations
 
         """
-        return Compose(
-            [
-                Resize(
-                    (
-                        self.image_size//self.scale_factor,
-                        self.image_size//self.scale_factor
-                    ),
-                    Image.BICUBIC
+        return Compose([
+            Resize(size=(
+                    self.image_size//self.scale_factor,
+                    self.image_size//self.scale_factor
                 ),
-                ToTensor(),
-            ]
-        )
+                interpolation=Image.BICUBIC
+            ),
+            ToTensor(),
+        ])
 
     def get_hr_transforms(self):
         """Returns HR image transformations
 
         """
-        return Compose(
-            [
-                Resize((self.image_size, self.image_size), Image.BICUBIC),
-                ToTensor(),
-            ]
-        )
+        return Compose([
+            Resize((self.image_size, self.image_size), Image.BICUBIC),
+            ToTensor(),
+        ])
 
     def get_files(self, root_dir: str) -> List[str]:
         """Returns  a list of valid image files in a directory
