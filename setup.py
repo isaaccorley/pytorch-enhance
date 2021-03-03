@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 url = "https://github.com/IsaacCorley/pytorch-enhance"
 
 with open("requirements.txt", "r") as f:
@@ -11,7 +11,7 @@ tests_require = ['pytest', 'pytest-cov', 'mock']
 
 setup(
     name='torch_enhance',
-    packages=find_packages(),
+    packages=find_packages(exclude=['examples']),
     version=__version__,
     license='Apache License 2.0',
     description='Image Super-Resolution Library for PyTorch',

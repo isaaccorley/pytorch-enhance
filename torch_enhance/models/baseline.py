@@ -25,8 +25,6 @@ class Bicubic(BaseModel):
             )
         )
 
-        self.loss = nn.MSELoss()
-
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Super-resolve Low-Resolution input tensor
 
