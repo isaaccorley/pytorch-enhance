@@ -19,10 +19,17 @@ PyTorch Enhance provides a consolidated package of popular Image Super-Resolutio
 
 ## Installation
 
+### pip
 ```
 pip install torch-enhance
 ```
 
+### latest
+```
+git clone https://github.com/IsaacCorley/pytorch-enhance.git
+cd pytorch-enhance
+python setup.py install
+```
 
 ## Models
 The following models are currently implemented:
@@ -41,6 +48,8 @@ Not sure which models are currently the best? Check out the [PapersWithCode Imag
 ## Datasets
 The following benchmark datasets are available for usage:
 
+* **[BSDS100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[BSDS200](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 * **[BSDS300](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/)**
 * **[BSDS500](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/resources.html)**
 * **[Set5](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
@@ -50,8 +59,6 @@ The following benchmark datasets are available for usage:
 * **[Urban100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 * **[Manga109](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 * **[General100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
-* **[BSDS100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
-* **[BSDS200](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 
 
 ## Dataset Samples
@@ -66,19 +73,13 @@ The following benchmark datasets are available for usage:
 
 ## Losses
 
-* **VGG/Perceptual Loss**
+* **Perceptual Loss (VGG16)**
 
 ## Metrics
 
 * **Mean Squared Error (MSE)**
 * **Mean Absolute Error (MAE)**
 * **Peak-Signal-Noise-Ratio (PSNR)**
-
-TODO
-
-* **Structural Similarity Index (SSIM)**
-* **Universal Quality Index (UQI)**
-
 
 ## Examples
 

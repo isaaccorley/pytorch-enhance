@@ -15,7 +15,7 @@ class Bicubic(BaseModel):
     """
     def __init__(self, scale_factor: int):
 
-        super(Bicubic, self).__init__()
+        super().__init__()
 
         self.model = nn.Sequential(
             nn.Upsample(

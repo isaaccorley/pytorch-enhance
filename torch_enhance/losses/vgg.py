@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
+import torchvision.transforms as T
 
 
 class VGG(nn.Module):
@@ -15,19 +16,21 @@ class VGG(nn.Module):
     """
     def __init__(self, conv_index: str = "22"):
 
-        super(VGG, self).__init__()
-        vgg_features = torchvision.models.vgg19(pretrained=True).features
+        super().__init__()
+        vgg_features = torchvision.models.vgg16(pretrained=True).features
         modules = [m for m in vgg_features]
 
         if conv_index == "22":
-            self.vgg = nn.Sequential(*modules[:8])
+            vgg = nn.Sequential(*modules[:8])
         elif conv_index == "54":
-            self.vgg = nn.Sequential(*modules[:35])
+            vgg = nn.Sequential(*modules[:35])
 
-        vgg_mean = (0.485, 0.456, 0.406)
-        vgg_std = (0.229, 0.224, 0.225)
-        #self.sub_mean = common.MeanShift(rgb_range, vgg_mean, vgg_std)
-        self.vgg.requires_grad = False
+        vgg.requires_grad = False
+        vgg.eval()
+
+        self.vgg = vgg
+        self.vgg_mean = torch.tensor([0.485, 0.456, 0.406])[None, :, None, None]
+        self.vgg_std = torch.tensor([0.229, 0.224, 0.225])[None, :, None, None]
 
     def forward(self, sr: torch.Tensor, hr: torch.Tensor) -> torch.Tensor:
         """Compute VGG/Perceptual loss between Super-Resolved and High-Resolution
@@ -45,15 +48,12 @@ class VGG(nn.Module):
             Perceptual VGG loss between sr and hr
 
         """
-        def _forward(x):
-            #x = self.sub_mean(x)
-            x = self.vgg(x)
-            return x
-
-        vgg_sr = _forward(sr)
+        sr = (sr - self.mean) / self.std
+        hr = (hr - self.mean) / self.std
+        vgg_sr = self.vgg(sr)
 
         with torch.no_grad():
-            vgg_hr = _forward(hr.detach())
+            vgg_hr = self.vgg(hr)
 
         loss = F.mse_loss(vgg_sr, vgg_hr)
 

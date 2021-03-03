@@ -14,8 +14,7 @@ class UpsampleBlock(nn.Module):
         channels: int,
         kernel_size: int
     ):
-
-        super(UpsampleBlock, self).__init__()
+        super().__init__()
 
         layers = []
         for _ in range(n_upsamples):
@@ -48,8 +47,7 @@ class ResidualBlock(nn.Module):
         res_scale: float,
         activation
     ):
-
-        super(ResidualBlock, self).__init__()
+        super().__init__()
 
         self.res_scale = res_scale
 
@@ -89,8 +87,7 @@ class EDSR(BaseModel):
 
     """
     def __init__(self, scale_factor: int):
-
-        super(EDSR, self).__init__()
+        super().__init__()
 
         self.n_res_blocks = 32
 

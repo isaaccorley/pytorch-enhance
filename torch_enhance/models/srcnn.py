@@ -16,8 +16,7 @@ class SRCNN(BaseModel):
 
     """
     def __init__(self, scale_factor: int):
-
-        super(SRCNN, self).__init__()
+        super().__init__()
 
         self.upsample = Bicubic(scale_factor)
 

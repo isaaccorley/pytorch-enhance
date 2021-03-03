@@ -14,8 +14,7 @@ class ResidualBlock(nn.Module):
         kernel_size: int,
         activation
     ):
-
-        super(ResidualBlock, self).__init__()
+        super().__init__()
 
         self.model = nn.Sequential(
             nn.Conv2d(
@@ -53,8 +52,7 @@ class UpsampleBlock(nn.Module):
         kernel_size: int,
         activation
     ):
-
-        super(UpsampleBlock, self).__init__()
+        super().__init__()
 
         layers = []
         for _ in range(n_upsamples):
@@ -88,8 +86,7 @@ class SRResNet(BaseModel):
 
     """
     def __init__(self, scale_factor: int):
-
-        super(SRResNet, self).__init__()
+        super().__init__()
 
         self.n_res_blocks = 16
 
@@ -138,7 +135,7 @@ class SRResNet(BaseModel):
                 stride=1,
                 padding=4
             ),
-            nn.Tanh()
+            nn.Sigmoid()
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

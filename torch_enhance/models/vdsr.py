@@ -15,8 +15,7 @@ class VDSR(BaseModel):
 
     """
     def __init__(self, scale_factor):
-
-        super(VDSR, self).__init__()
+        super().__init__()
 
         self.n_layers = 20
         self.upsample = Bicubic(scale_factor)
