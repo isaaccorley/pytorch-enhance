@@ -9,7 +9,7 @@ from .base import BSDS300_URL, BaseDataset
 
 
 @dataclass()
-class BSDS300(BaseDataset):
+class DIV2K(BaseDataset):
 
     scale_factor: int = 2
     image_size: int = 256
@@ -26,7 +26,7 @@ class BSDS300(BaseDataset):
         if self.data_dir == "":
             self.data_dir = os.path.join(os.getcwd(), self.base_dir)
 
-        self.root_dir = os.path.join(self.data_dir, "BSDS300")
+        self.root_dir = os.path.join(self.data_dir, "DIV2K")
         self.download(self.data_dir)
         self.set_dir = os.path.join(
             self.root_dir, 'train' if self.train else 'test'
@@ -64,7 +64,7 @@ class BSDS300(BaseDataset):
             )
 
             # Tidy up
-            for d in ['train', 'test']:
+            for d in ['train', 'val']:
                 shutil.move(
                     src=os.path.join(self.root_dir, 'images', d),
                     dst=self.root_dir

@@ -59,6 +59,7 @@ The following benchmark datasets are available for usage:
 * **[Urban100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 * **[Manga109](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
 * **[General100](https://drive.google.com/drive/folders/1pRmhEmmY-tPF7uH8DuVthfHoApZWJ1QU)**
+* **[DIV2K](https://data.vision.ee.ethz.ch/cvl/DIV2K/)**
 
 
 ## Dataset Samples
