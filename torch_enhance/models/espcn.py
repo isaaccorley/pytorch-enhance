@@ -12,8 +12,8 @@ class ESPCN(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-    pretrained : bool
-        If True download and load pretrained weights
+    channels: int
+        Number of input and output channels
 
     """
 

@@ -11,7 +11,8 @@ class Bicubic(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
     """
 
     def __init__(self, scale_factor: int, channels: int = 3):

@@ -12,7 +12,10 @@ class VDSR(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
+    num_layers: int
+        Number of stacked conv layers
     """
 
     def __init__(

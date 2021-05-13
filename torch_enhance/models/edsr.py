@@ -75,7 +75,10 @@ class EDSR(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
+    num_blocks: int
+        Number of stacked residual blocks
     """
 
     def __init__(
