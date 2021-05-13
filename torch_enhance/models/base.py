@@ -10,9 +10,7 @@ MODELS_PATH = ".models"
 
 
 class BaseModel(nn.Module):
-    """Base Super-Resolution module
-
-    """
+    """Base Super-Resolution module"""
 
     def load_pretrained(self, weights_url: str, weights_path: str) -> None:
         """Download pretrained weights and load as state dict

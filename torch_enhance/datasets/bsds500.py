@@ -56,17 +56,15 @@ class BSDS500(BaseDataset):
             os.makedirs(self.root_dir)
 
             download_and_extract_archive(
-                self.url,
-                data_dir,
-                remove_finished=True
+                self.url, data_dir, remove_finished=True
             )
 
             # Tidy up
-            for d in ['train', 'val', 'test']:
+            for d in ["train", "val", "test"]:
                 shutil.move(
-                    src=os.path.join(data_dir, 'BSR/BSDS500/data/images', d),
-                    dst=self.root_dir
+                    src=os.path.join(data_dir, "BSR/BSDS500/data/images", d),
+                    dst=self.root_dir,
                 )
-                os.remove(os.path.join(self.root_dir, d, 'Thumbs.db'))
+                os.remove(os.path.join(self.root_dir, d, "Thumbs.db"))
 
-            shutil.rmtree(os.path.join(data_dir, 'BSR'))
+            shutil.rmtree(os.path.join(data_dir, "BSR"))

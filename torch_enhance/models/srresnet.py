@@ -5,15 +5,9 @@ from .base import BaseModel
 
 
 class ResidualBlock(nn.Module):
-    """Base Residual Block
+    """Base Residual Block"""
 
-    """
-    def __init__(
-        self,
-        channels: int,
-        kernel_size: int,
-        activation
-    ):
+    def __init__(self, channels: int, kernel_size: int, activation):
         super().__init__()
 
         self.model = nn.Sequential(
@@ -22,7 +16,7 @@ class ResidualBlock(nn.Module):
                 out_channels=channels,
                 kernel_size=kernel_size,
                 stride=1,
-                padding=kernel_size//2
+                padding=kernel_size // 2,
             ),
             nn.BatchNorm2d(num_features=channels),
             activation(),
@@ -31,9 +25,9 @@ class ResidualBlock(nn.Module):
                 out_channels=channels,
                 kernel_size=kernel_size,
                 stride=1,
-                padding=kernel_size//2
+                padding=kernel_size // 2,
             ),
-            nn.BatchNorm2d(num_features=channels)
+            nn.BatchNorm2d(num_features=channels),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -41,31 +35,28 @@ class ResidualBlock(nn.Module):
 
 
 class UpsampleBlock(nn.Module):
-    """Base PixelShuffle Upsample Block
+    """Base PixelShuffle Upsample Block"""
 
-    """
     def __init__(
-        self,
-        n_upsamples: int,
-        channels: int,
-        kernel_size: int,
-        activation
+        self, n_upsamples: int, channels: int, kernel_size: int, activation
     ):
         super().__init__()
 
         layers = []
         for _ in range(n_upsamples):
-            layers.extend([
-                nn.Conv2d(
-                    in_channels=channels,
-                    out_channels=channels * 2**2,
-                    kernel_size=kernel_size,
-                    stride=1,
-                    padding=kernel_size//2
-                ),
-                nn.PixelShuffle(2),
-                activation()
-            ])
+            layers.extend(
+                [
+                    nn.Conv2d(
+                        in_channels=channels,
+                        out_channels=channels * 2 ** 2,
+                        kernel_size=kernel_size,
+                        stride=1,
+                        padding=kernel_size // 2,
+                    ),
+                    nn.PixelShuffle(2),
+                    activation(),
+                ]
+            )
 
         self.model = nn.Sequential(*layers)
 
@@ -83,7 +74,10 @@ class SRResNet(BaseModel):
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
     """
-    def __init__(self, scale_factor: int, channels: int = 3, num_blocks: int = 16):
+
+    def __init__(
+        self, scale_factor: int, channels: int = 3, num_blocks: int = 16
+    ):
         super().__init__()
 
         # Pre Residual Blocks
@@ -93,9 +87,9 @@ class SRResNet(BaseModel):
                 out_channels=64,
                 kernel_size=9,
                 stride=1,
-                padding=4
+                padding=4,
             ),
-            nn.PReLU()
+            nn.PReLU(),
         )
 
         # Residual Blocks
@@ -103,13 +97,15 @@ class SRResNet(BaseModel):
             ResidualBlock(channels=64, kernel_size=3, activation=nn.PReLU)
             for _ in range(num_blocks)
         ]
-        self.res_blocks.append(nn.Conv2d(
-            in_channels=64,
-            out_channels=64,
-            kernel_size=3,
-            stride=1,
-            padding=1
-        ))
+        self.res_blocks.append(
+            nn.Conv2d(
+                in_channels=64,
+                out_channels=64,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+            )
+        )
         self.res_blocks.append(nn.BatchNorm2d(num_features=64))
         self.res_blocks = nn.Sequential(*self.res_blocks)
 
@@ -119,7 +115,7 @@ class SRResNet(BaseModel):
             n_upsamples=n_upsamples,
             channels=64,
             kernel_size=3,
-            activation=nn.PReLU
+            activation=nn.PReLU,
         )
 
         # Output layer
@@ -129,9 +125,9 @@ class SRResNet(BaseModel):
                 out_channels=channels,
                 kernel_size=9,
                 stride=1,
-                padding=4
+                padding=4,
             ),
-            nn.Sigmoid()
+            nn.Sigmoid(),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

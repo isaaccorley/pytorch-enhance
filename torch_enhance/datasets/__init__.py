@@ -25,5 +25,5 @@ __all__ = [
     "Urban100",
     "Manga109",
     "General100",
-    "DIV2K"
+    "DIV2K",
 ]

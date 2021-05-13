@@ -21,7 +21,7 @@ class Historical(BaseDataset):
         self.url = HISTORICAL_URL
         self.extensions = [".png"]
 
-        if self.data_dir == '':
+        if self.data_dir == "":
             self.data_dir = os.path.join(os.getcwd(), self.base_dir)
 
         self.root_dir = os.path.join(self.data_dir, "historical")

@@ -1,9 +1,7 @@
 import torchvision
 
 
-__all__ = [
-    "plot_compare"
-]
+__all__ = ["plot_compare"]
 
 
 def plot_compare(sr, hr, baseline, filename):

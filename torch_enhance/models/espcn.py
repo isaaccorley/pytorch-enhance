@@ -16,6 +16,7 @@ class ESPCN(BaseModel):
         If True download and load pretrained weights
 
     """
+
     def __init__(self, scale_factor: int, channels: int = 3):
         super().__init__()
 
@@ -25,7 +26,7 @@ class ESPCN(BaseModel):
                 out_channels=64,
                 kernel_size=5,
                 stride=1,
-                padding=2
+                padding=2,
             ),
             nn.ReLU(),
             nn.Conv2d(
@@ -33,7 +34,7 @@ class ESPCN(BaseModel):
                 out_channels=64,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.ReLU(),
             nn.Conv2d(
@@ -41,15 +42,15 @@ class ESPCN(BaseModel):
                 out_channels=32,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=32,
-                out_channels=channels * scale_factor**2,
+                out_channels=channels * scale_factor ** 2,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.PixelShuffle(scale_factor),
         )

@@ -14,6 +14,7 @@ class VGG(nn.Module):
         Convolutional layer in VGG model to use as perceptual output
 
     """
+
     def __init__(self, conv_index: str = "22"):
 
         super().__init__()

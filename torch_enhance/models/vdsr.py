@@ -14,7 +14,10 @@ class VDSR(BaseModel):
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
     """
-    def __init__(self, scale_factor: int, channels: int = 3, num_layers: int = 20):
+
+    def __init__(
+        self, scale_factor: int, channels: int = 3, num_layers: int = 20
+    ):
         super().__init__()
 
         self.upsample = Bicubic(scale_factor)
@@ -26,30 +29,34 @@ class VDSR(BaseModel):
                 out_channels=64,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.ReLU(),
         ]
 
         # Residual reconstruction
         for i in range(num_layers - 2):
-            layers.append(nn.Conv2d(
-                in_channels=64,
-                out_channels=64,
-                kernel_size=3,
-                stride=1,
-                padding=1
-            ))
+            layers.append(
+                nn.Conv2d(
+                    in_channels=64,
+                    out_channels=64,
+                    kernel_size=3,
+                    stride=1,
+                    padding=1,
+                )
+            )
             layers.append(nn.ReLU())
 
         # Output reconstruction layer
-        layers.append(nn.Conv2d(
-            in_channels=64,
-            out_channels=channels,
-            kernel_size=3,
-            stride=1,
-            padding=1
-        ))
+        layers.append(
+            nn.Conv2d(
+                in_channels=64,
+                out_channels=channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+            )
+        )
 
         self.model = nn.Sequential(*layers)
 
