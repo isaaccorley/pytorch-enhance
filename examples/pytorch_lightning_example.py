@@ -74,18 +74,19 @@ class Module(pl.LightningModule):
 if __name__ == '__main__':
     
     scale_factor = 2
-    
-    # Define model
-    model = SRCNN(scale_factor)
-    module = Module(model)
 
     # Setup dataloaders
-    train_dataset = BSDS300(scale_factor=scale_factor, data_dir="../.data/")
-    val_dataset = Set14(scale_factor=scale_factor, data_dir="../.data/")
-    test_dataset = Set5(scale_factor=scale_factor, data_dir="../.data/")
+    train_dataset = BSDS300(scale_factor=scale_factor)
+    val_dataset = Set14(scale_factor=scale_factor)
+    test_dataset = Set5(scale_factor=scale_factor)
     train_dataloader = DataLoader(train_dataset, batch_size=32)
     val_dataloader = DataLoader(val_dataset, batch_size=1)
     test_dataloader = DataLoader(test_dataset, batch_size=1)
+
+    # Define model
+    channels = 3 if train_dataset.color_space == "RGB" else 1
+    model = SRCNN(scale_factor, channels)
+    module = Module(model)
 
     trainer = pl.Trainer(max_epochs=5, gpus=1)
     trainer.fit(
