@@ -46,7 +46,7 @@ class BaseDataset(torch.utils.data.Dataset):
                     self.image_size//self.scale_factor,
                     self.image_size//self.scale_factor
                 ),
-                interpolation=Image.BICUBIC
+                interpolation=T.InterpolationMode.BICUBIC
             ),
             ToTensor(),
         ])
@@ -56,7 +56,7 @@ class BaseDataset(torch.utils.data.Dataset):
 
         """
         return Compose([
-            Resize((self.image_size, self.image_size), Image.BICUBIC),
+            Resize((self.image_size, self.image_size), T.InterpolationMode.BICUBIC),
             ToTensor(),
         ])
 
