@@ -16,13 +16,12 @@ class ESPCN(BaseModel):
         If True download and load pretrained weights
 
     """
-    def __init__(self, scale_factor: int):
-
+    def __init__(self, scale_factor: int, channels: int = 3):
         super().__init__()
 
         self.model = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=64,
                 kernel_size=5,
                 stride=1,
@@ -47,7 +46,7 @@ class ESPCN(BaseModel):
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=32,
-                out_channels=3 * scale_factor**2,
+                out_channels=channels * scale_factor**2,
                 kernel_size=3,
                 stride=1,
                 padding=1
@@ -69,5 +68,4 @@ class ESPCN(BaseModel):
             Super-Resolved image as tensor
 
         """
-        x = self.model(x)
-        return x
+        return self.model(x)

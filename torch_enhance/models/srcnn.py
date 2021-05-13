@@ -15,14 +15,14 @@ class SRCNN(BaseModel):
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
     """
-    def __init__(self, scale_factor: int):
+    def __init__(self, scale_factor: int, channels: int = 3):
         super().__init__()
 
         self.upsample = Bicubic(scale_factor)
 
         self.model = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=64,
                 kernel_size=9,
                 stride=1,
@@ -39,7 +39,7 @@ class SRCNN(BaseModel):
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=32,
-                out_channels=3,
+                out_channels=channels,
                 kernel_size=5,
                 stride=1,
                 padding=2

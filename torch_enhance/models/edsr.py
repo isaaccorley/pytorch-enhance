@@ -86,15 +86,13 @@ class EDSR(BaseModel):
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
 
     """
-    def __init__(self, scale_factor: int):
+    def __init__(self, scale_factor: int, channels: int = 3, num_blocks: int = 32):
         super().__init__()
-
-        self.n_res_blocks = 32
 
         # Pre Residual Blocks
         self.head = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=256,
                 kernel_size=3,
                 stride=1,
@@ -109,7 +107,7 @@ class EDSR(BaseModel):
                 kernel_size=3,
                 res_scale=0.1,
                 activation=nn.ReLU
-            ) for _ in range(self.n_res_blocks)
+            ) for _ in range(num_blocks)
         ]
         self.res_blocks.append(
             nn.Conv2d(
@@ -134,7 +132,7 @@ class EDSR(BaseModel):
         self.tail = nn.Sequential(
             nn.Conv2d(
                 in_channels=256,
-                out_channels=3,
+                out_channels=channels,
                 kernel_size=3,
                 stride=1,
                 padding=1
@@ -156,8 +154,7 @@ class EDSR(BaseModel):
 
         """
         x = self.head(x)
-        shortcut = x
-        x = self.res_blocks(x) + shortcut
+        x = x + self.res_blocks(x)
         x = self.upsample(x)
         x = self.tail(x)
         return x
