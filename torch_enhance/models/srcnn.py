@@ -13,21 +13,22 @@ class SRCNN(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
     """
-    def __init__(self, scale_factor: int):
 
-        super(SRCNN, self).__init__()
+    def __init__(self, scale_factor: int, channels: int = 3):
+        super().__init__()
 
         self.upsample = Bicubic(scale_factor)
 
         self.model = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=64,
                 kernel_size=9,
                 stride=1,
-                padding=4
+                padding=4,
             ),
             nn.ReLU(),
             nn.Conv2d(
@@ -35,16 +36,16 @@ class SRCNN(BaseModel):
                 out_channels=32,
                 kernel_size=1,
                 stride=1,
-                padding=0
+                padding=0,
             ),
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=32,
-                out_channels=3,
+                out_channels=channels,
                 kernel_size=5,
                 stride=1,
-                padding=2
-            )
+                padding=2,
+            ),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:

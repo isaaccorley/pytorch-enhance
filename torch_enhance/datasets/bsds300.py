@@ -29,7 +29,7 @@ class BSDS300(BaseDataset):
         self.root_dir = os.path.join(self.data_dir, "BSDS300")
         self.download(self.data_dir)
         self.set_dir = os.path.join(
-            self.root_dir, 'train' if self.train else 'test'
+            self.root_dir, "train" if self.train else "test"
         )
         self.file_names = self.get_files(self.set_dir)
 
@@ -58,20 +58,18 @@ class BSDS300(BaseDataset):
             os.makedirs(self.root_dir)
 
             download_and_extract_archive(
-                self.url,
-                data_dir,
-                remove_finished=True
+                self.url, data_dir, remove_finished=True
             )
 
             # Tidy up
-            for d in ['train', 'test']:
+            for d in ["train", "test"]:
                 shutil.move(
-                    src=os.path.join(self.root_dir, 'images', d),
-                    dst=self.root_dir
+                    src=os.path.join(self.root_dir, "images", d),
+                    dst=self.root_dir,
                 )
 
             for f in os.listdir(self.root_dir):
-                if f not in ['train', 'test']:
+                if f not in ["train", "test"]:
                     path = os.path.join(self.root_dir, f)
 
                     if os.path.isdir(path):

@@ -5,30 +5,25 @@ from .base import BaseModel
 
 
 class UpsampleBlock(nn.Module):
-    """Base PixelShuffle Upsample Block
+    """Base PixelShuffle Upsample Block"""
 
-    """
-    def __init__(
-        self,
-        n_upsamples: int,
-        channels: int,
-        kernel_size: int
-    ):
-
-        super(UpsampleBlock, self).__init__()
+    def __init__(self, n_upsamples: int, channels: int, kernel_size: int):
+        super().__init__()
 
         layers = []
         for _ in range(n_upsamples):
-            layers.extend([
-                nn.Conv2d(
-                    in_channels=channels,
-                    out_channels=channels * 2**2,
-                    kernel_size=kernel_size,
-                    stride=1,
-                    padding=kernel_size//2
-                ),
-                nn.PixelShuffle(2)
-            ])
+            layers.extend(
+                [
+                    nn.Conv2d(
+                        in_channels=channels,
+                        out_channels=channels * 2 ** 2,
+                        kernel_size=kernel_size,
+                        stride=1,
+                        padding=kernel_size // 2,
+                    ),
+                    nn.PixelShuffle(2),
+                ]
+            )
 
         self.model = nn.Sequential(*layers)
 
@@ -38,18 +33,12 @@ class UpsampleBlock(nn.Module):
 
 
 class ResidualBlock(nn.Module):
-    """Base Residual Block
+    """Base Residual Block"""
 
-    """
     def __init__(
-        self,
-        channels: int,
-        kernel_size: int,
-        res_scale: float,
-        activation
+        self, channels: int, kernel_size: int, res_scale: float, activation
     ):
-
-        super(ResidualBlock, self).__init__()
+        super().__init__()
 
         self.res_scale = res_scale
 
@@ -59,7 +48,7 @@ class ResidualBlock(nn.Module):
                 out_channels=channels,
                 kernel_size=kernel_size,
                 stride=1,
-                padding=kernel_size//2
+                padding=kernel_size // 2,
             ),
             activation(),
             nn.Conv2d(
@@ -67,7 +56,7 @@ class ResidualBlock(nn.Module):
                 out_channels=channels,
                 kernel_size=kernel_size,
                 stride=1,
-                padding=kernel_size//2
+                padding=kernel_size // 2,
             ),
         )
 
@@ -86,33 +75,34 @@ class EDSR(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
+    num_blocks: int
+        Number of stacked residual blocks
     """
-    def __init__(self, scale_factor: int):
 
-        super(EDSR, self).__init__()
-
-        self.n_res_blocks = 32
+    def __init__(
+        self, scale_factor: int, channels: int = 3, num_blocks: int = 32
+    ):
+        super().__init__()
 
         # Pre Residual Blocks
         self.head = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=256,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
         )
 
         # Residual Blocks
         self.res_blocks = [
             ResidualBlock(
-                channels=256,
-                kernel_size=3,
-                res_scale=0.1,
-                activation=nn.ReLU
-            ) for _ in range(self.n_res_blocks)
+                channels=256, kernel_size=3, res_scale=0.1, activation=nn.ReLU
+            )
+            for _ in range(num_blocks)
         ]
         self.res_blocks.append(
             nn.Conv2d(
@@ -120,7 +110,7 @@ class EDSR(BaseModel):
                 out_channels=256,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             )
         )
         self.res_blocks = nn.Sequential(*self.res_blocks)
@@ -128,19 +118,17 @@ class EDSR(BaseModel):
         # Upsamples
         n_upsamples = 1 if scale_factor == 2 else 2
         self.upsample = UpsampleBlock(
-            n_upsamples=n_upsamples,
-            channels=256,
-            kernel_size=3
+            n_upsamples=n_upsamples, channels=256, kernel_size=3
         )
 
         # Output layer
         self.tail = nn.Sequential(
             nn.Conv2d(
                 in_channels=256,
-                out_channels=3,
+                out_channels=channels,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
         )
 
@@ -159,8 +147,7 @@ class EDSR(BaseModel):
 
         """
         x = self.head(x)
-        shortcut = x
-        x = self.res_blocks(x) + shortcut
+        x = x + self.res_blocks(x)
         x = self.upsample(x)
         x = self.tail(x)
         return x

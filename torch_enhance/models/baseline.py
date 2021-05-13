@@ -11,17 +11,15 @@ class Bicubic(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-
+    channels: int
+        Number of input and output channels
     """
-    def __init__(self, scale_factor: int):
 
-        super(Bicubic, self).__init__()
-
+    def __init__(self, scale_factor: int, channels: int = 3):
+        super().__init__()
         self.model = nn.Sequential(
             nn.Upsample(
-                scale_factor=scale_factor,
-                mode="bicubic",
-                align_corners=False
+                scale_factor=scale_factor, mode="bicubic", align_corners=False
             )
         )
 
@@ -39,5 +37,4 @@ class Bicubic(BaseModel):
             Super-Resolved image as tensor
 
         """
-        x = self.model(x)
-        return x
+        return self.model(x)

@@ -7,12 +7,4 @@ from .espcn import ESPCN
 from .srresnet import SRResNet
 
 
-__all__ = [
-    "BaseModel",
-    "Bicubic",
-    "SRCNN",
-    "VDSR",
-    "EDSR",
-    "ESPCN",
-    "SRResNet"
-]
+__all__ = ["BaseModel", "Bicubic", "SRCNN", "VDSR", "EDSR", "ESPCN", "SRResNet"]

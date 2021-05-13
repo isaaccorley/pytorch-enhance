@@ -10,6 +10,7 @@ from .historical import Historical
 from .urban100 import Urban100
 from .manga109 import Manga109
 from .general100 import General100
+from .div2k import DIV2K
 
 __all__ = [
     "BaseDataset",
@@ -23,5 +24,6 @@ __all__ = [
     "Historical",
     "Urban100",
     "Manga109",
-    "General100"
+    "General100",
+    "DIV2K",
 ]

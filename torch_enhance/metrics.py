@@ -2,11 +2,7 @@ import torch
 import torch.nn.functional as F
 
 
-__all__ = [
-    "mse",
-    "mae",
-    "psnr"
-]
+__all__ = ["mse", "mae", "psnr"]
 
 
 @torch.no_grad()

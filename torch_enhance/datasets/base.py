@@ -6,13 +6,13 @@ import torchvision.transforms as T
 from torchvision.transforms import Compose, ToTensor, Resize
 from torchvision.datasets.utils import (
     download_file_from_google_drive,
-    extract_archive
+    extract_archive,
 )
 from PIL import Image
 
 
 DIV2K_TRAIN_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip"
-DIV2K_TEST_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip"
+DIV2K_VAL_URL = "http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip"
 BSDS300_URL = "http://www2.eecs.berkeley.edu/Research/Projects/CS/vision/bsds/BSDS300-images.tgz"
 BSDS500_URL = "http://www.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/BSR/BSR_bsds500.tgz"
 BSDS100_URL = "1nu78kEKoSTti7ynh8pdxa7ae7TvZiNOy"
@@ -27,9 +27,7 @@ GENERAL100_URL = "1tD6XBLkV9Qteo2obMRcRueTRwie7Hqae"
 
 
 class BaseDataset(torch.utils.data.Dataset):
-    """Base Super Resolution Dataset Class
-
-    """
+    """Base Super Resolution Dataset Class"""
 
     base_dir: str = ".data"
     color_space: str = "RGB"
@@ -38,27 +36,31 @@ class BaseDataset(torch.utils.data.Dataset):
     hr_transform: T.Compose = None
 
     def get_lr_transforms(self):
-        """Returns HR to LR image transformations
-
-        """
-        return Compose([
-            Resize(size=(
-                    self.image_size//self.scale_factor,
-                    self.image_size//self.scale_factor
+        """Returns HR to LR image transformations"""
+        return Compose(
+            [
+                Resize(
+                    size=(
+                        self.image_size // self.scale_factor,
+                        self.image_size // self.scale_factor,
+                    ),
+                    interpolation=T.InterpolationMode.BICUBIC,
                 ),
-                interpolation=Image.BICUBIC
-            ),
-            ToTensor(),
-        ])
+                ToTensor(),
+            ]
+        )
 
     def get_hr_transforms(self):
-        """Returns HR image transformations
-
-        """
-        return Compose([
-            Resize((self.image_size, self.image_size), Image.BICUBIC),
-            ToTensor(),
-        ])
+        """Returns HR image transformations"""
+        return Compose(
+            [
+                Resize(
+                    (self.image_size, self.image_size),
+                    T.InterpolationMode.BICUBIC,
+                ),
+                ToTensor(),
+            ]
+        )
 
     def get_files(self, root_dir: str) -> List[str]:
         """Returns  a list of valid image files in a directory
@@ -169,12 +171,10 @@ class BaseDataset(torch.utils.data.Dataset):
         if not os.path.exists(self.root_dir):
 
             download_file_from_google_drive(
-                file_id=self.url,
-                root=data_dir,
-                filename=filename
+                file_id=self.url, root=data_dir, filename=filename
             )
             extract_archive(
                 from_path=os.path.join(data_dir, filename),
                 to_path=data_dir,
-                remove_finished=True
+                remove_finished=True,
             )

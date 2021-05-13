@@ -12,21 +12,21 @@ class ESPCN(BaseModel):
     ----------
     scale_factor : int
         Super-Resolution scale factor. Determines Low-Resolution downsampling.
-    pretrained : bool
-        If True download and load pretrained weights
+    channels: int
+        Number of input and output channels
 
     """
-    def __init__(self, scale_factor: int):
 
-        super(ESPCN, self).__init__()
+    def __init__(self, scale_factor: int, channels: int = 3):
+        super().__init__()
 
         self.model = nn.Sequential(
             nn.Conv2d(
-                in_channels=3,
+                in_channels=channels,
                 out_channels=64,
                 kernel_size=5,
                 stride=1,
-                padding=2
+                padding=2,
             ),
             nn.ReLU(),
             nn.Conv2d(
@@ -34,7 +34,7 @@ class ESPCN(BaseModel):
                 out_channels=64,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.ReLU(),
             nn.Conv2d(
@@ -42,15 +42,15 @@ class ESPCN(BaseModel):
                 out_channels=32,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.ReLU(),
             nn.Conv2d(
                 in_channels=32,
-                out_channels=3 * scale_factor**2,
+                out_channels=channels * scale_factor ** 2,
                 kernel_size=3,
                 stride=1,
-                padding=1
+                padding=1,
             ),
             nn.PixelShuffle(scale_factor),
         )
@@ -69,5 +69,4 @@ class ESPCN(BaseModel):
             Super-Resolved image as tensor
 
         """
-        x = self.model(x)
-        return x
+        return self.model(x)
