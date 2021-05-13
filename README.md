@@ -40,6 +40,16 @@ The following models are currently implemented:
 * **SRResNet** from Ledig et. al [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/pdf/1609.04802v5.pdf)
 * **EDSR** from Lim et. al [Enhanced Deep Residual Networks for Single Image Super-Resolution](https://arxiv.org/pdf/1707.02921v1.pdf)
 
+```python
+import torch
+import torch_enhance
+
+# increase resolution by factor of 2 (e.g. 128x128 -> 256x256)
+model = torch_enhance.models.SRResNet(scale_factor=2, channels=3)
+
+lr = torch.randn(1, 3, 128, 128)
+sr = model(x) # [1, 3, 256, 256]
+```
 
 ## State-of-the-Art
 Not sure which models are currently the best? Check out the [PapersWithCode Image Super-Resolution Leaderboards](https://paperswithcode.com/task/image-super-resolution)
