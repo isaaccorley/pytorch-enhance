@@ -79,4 +79,5 @@ class BaseModel(nn.Module):
         x *= 255.0
         x = x.clamp(0, 255)
         x = x.to(torch.uint8)
+        x = x.squeeze(0)
         return x
