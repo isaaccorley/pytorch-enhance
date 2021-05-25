@@ -57,8 +57,14 @@ def test_enhance():
     model = models.SRCNN(scale_factor=SCALE_FACTOR, channels=CHANNELS)
     model = model.to(DEVICE)
     sr = model.enhance(lr)
-    assert sr.shape == (64, 64, 3)
+    assert sr.shape == (3, 64, 64)
     assert sr.dtype == torch.uint8
 
     sr = model.enhance(lr.squeeze(0))
-    assert sr.shape == (64, 64, 3)
+    assert sr.shape == (3, 64, 64)
+
+    lr2 = torch.ones(2, CHANNELS, 32, 32)
+    lr2 = lr2.to(torch.float32)
+    lr2 = lr2.to(DEVICE)
+    sr = model.enhance(lr2)
+    assert sr.shape == (2, 3, 64, 64)
