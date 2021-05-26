@@ -6,8 +6,8 @@ from .baseline import Bicubic
 
 
 class SRCNN(BaseModel):
-    """Super-Resolution Convolutional Neural Network
-    https://arxiv.org/pdf/1501.00092v3.pdf
+    """Super-Resolution Convolutional Neural Network (SRCNN)
+    https://arxiv.org/abs/1501.00092v3
 
     Parameters
     ----------

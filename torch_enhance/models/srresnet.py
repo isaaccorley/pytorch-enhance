@@ -65,8 +65,8 @@ class UpsampleBlock(nn.Module):
 
 
 class SRResNet(BaseModel):
-    """Super-Resolution Residual Neural Network
-    https://arxiv.org/pdf/1609.04802v5.pdf
+    """Super-Resolution Residual Neural Network (SRResNet)
+    https://arxiv.org/abs/1609.04802v5
 
     Parameters
     ----------

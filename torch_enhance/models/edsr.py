@@ -69,7 +69,7 @@ class ResidualBlock(nn.Module):
 
 class EDSR(BaseModel):
     """Enhanced Deep Residual Networks for Single Image Super-Resolution
-    https://arxiv.org/pdf/1707.02921v1.pdf
+    https://arxiv.org/abs/1707.02921v1
 
     Parameters
     ----------
@@ -81,9 +81,7 @@ class EDSR(BaseModel):
         Number of stacked residual blocks
     """
 
-    def __init__(
-        self, scale_factor: int, channels: int = 3, num_blocks: int = 32
-    ):
+    def __init__(self, scale_factor: int, channels: int = 3, num_blocks: int = 32):
         super().__init__()
 
         # Pre Residual Blocks

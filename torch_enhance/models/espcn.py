@@ -5,8 +5,8 @@ from .base import BaseModel
 
 
 class ESPCN(BaseModel):
-    """Efficient Sub-Pixel Convolutional Neural Network
-    https://arxiv.org/pdf/1609.05158v2.pdf
+    """Efficient Sub-Pixel Convolutional Neural Network (ESPCN)
+    https://arxiv.org/abs/1609.05158v2
 
     Parameters
     ----------

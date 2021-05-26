@@ -5,8 +5,8 @@ from .baseline import Bicubic
 
 
 class VDSR(BaseModel):
-    """Very Deep Super Resolution
-    https://arxiv.org/pdf/1511.04587.pdf
+    """Very Deep Super Resolution (VDSR)
+    https://arxiv.org/abs/1511.04587
 
     Parameters
     ----------
