@@ -12,24 +12,21 @@ class UpsampleBlock(nn.Module):
 
         layers = []
         for _ in range(n_upsamples):
-            layers.extend(
-                [
-                    nn.Conv2d(
-                        in_channels=channels,
-                        out_channels=channels * 2 ** 2,
-                        kernel_size=kernel_size,
-                        stride=1,
-                        padding=kernel_size // 2,
-                    ),
-                    nn.PixelShuffle(2),
-                ]
-            )
+            layers.extend([
+                nn.Conv2d(
+                    in_channels=channels,
+                    out_channels=channels * 2 ** 2,
+                    kernel_size=kernel_size,
+                    stride=1,
+                    padding=kernel_size // 2,
+                ),
+                nn.PixelShuffle(2),
+            ])
 
         self.model = nn.Sequential(*layers)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = self.model(x)
-        return x
+        return self.model(x)
 
 
 class ResidualBlock(nn.Module):

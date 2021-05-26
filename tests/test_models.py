@@ -1,70 +1,59 @@
-import pytest
+import itertools
 
+import pytest
 import torch
+import torch.nn as nn
 from torch_enhance import models
 
-
+DTYPE = torch.float32
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-SCALE_FACTOR = 2
-CHANNELS = 3
-lr = torch.ones(1, CHANNELS, 32, 32)
-lr = lr.to(torch.float32)
-lr = lr.to(DEVICE)
+IMAGE_SIZE = 32
+SCALE_FACTOR = [2, 3, 4]
+CHANNELS = [1, 3]
+BATCH_SIZE = [1, 2]
+MODELS = [
+    models.Bicubic, models.SRCNN, models.ESPCN,
+    models.EDSR, models.VDSR, models.SRResNet
+]
+params = list(itertools.product(MODELS, SCALE_FACTOR, CHANNELS, BATCH_SIZE))
 
-def test_bicubic():
-    model = models.Bicubic(scale_factor=SCALE_FACTOR, channels=CHANNELS)
+
+@pytest.mark.parametrize("module, scale_factor, channels, batch_size", params)
+def test_model(module, scale_factor, channels, batch_size):
+
+    # SRResNet only supports scale_factor 2 or 4
+    if scale_factor == 3 and module in [models.SRResNet, models.EDSR]:
+        return
+
+    model = module(scale_factor, channels)
     model = model.to(DEVICE)
+
+    lr = torch.ones(batch_size, channels, IMAGE_SIZE, IMAGE_SIZE)
+    lr = lr.to(DTYPE)
+    lr = lr.to(DEVICE)
     sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
+    assert sr.shape == (batch_size, channels, IMAGE_SIZE*scale_factor, IMAGE_SIZE*scale_factor)
     assert sr.dtype == torch.float32
 
-def test_edsr():
-    model = models.EDSR(scale_factor=SCALE_FACTOR, channels=CHANNELS)
-    model = model.to(DEVICE)
-    sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
-    assert sr.dtype == torch.float32
 
-def test_espcn():
-    model = models.ESPCN(scale_factor=SCALE_FACTOR, channels=CHANNELS)
-    model = model.to(DEVICE)
-    sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
-    assert sr.dtype == torch.float32
+@pytest.mark.parametrize("module, scale_factor, channels, batch_size", params)
+def test_enhance(module, scale_factor, channels, batch_size):
 
-def test_srcnn():
-    model = models.SRCNN(scale_factor=SCALE_FACTOR, channels=CHANNELS)
-    model = model.to(DEVICE)
-    sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
-    assert sr.dtype == torch.float32
+    # SRResNet only supports scale_factor 2 or 4
+    if scale_factor == 3 and module in [models.SRResNet, models.EDSR]:
+        return
 
-def test_srresnet():
-    model = models.SRResNet(scale_factor=SCALE_FACTOR, channels=CHANNELS)
+    model = module(scale_factor, channels)
     model = model.to(DEVICE)
-    sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
-    assert sr.dtype == torch.float32
 
-def test_vdsr():
-    model = models.VDSR(scale_factor=SCALE_FACTOR, channels=CHANNELS)
-    model = model.to(DEVICE)
-    sr = model(lr)
-    assert sr.shape == (1, 3, 64, 64)
-    assert sr.dtype == torch.float32
-
-def test_enhance():
-    model = models.SRCNN(scale_factor=SCALE_FACTOR, channels=CHANNELS)
-    model = model.to(DEVICE)
+    lr = torch.ones(batch_size, channels, IMAGE_SIZE, IMAGE_SIZE)
+    lr = lr.to(DTYPE)
+    lr = lr.to(DEVICE)
     sr = model.enhance(lr)
-    assert sr.shape == (3, 64, 64)
-    assert sr.dtype == torch.uint8
 
-    sr = model.enhance(lr.squeeze(0))
-    assert sr.shape == (3, 64, 64)
-
-    lr2 = torch.ones(2, CHANNELS, 32, 32)
-    lr2 = lr2.to(torch.float32)
-    lr2 = lr2.to(DEVICE)
-    sr = model.enhance(lr2)
-    assert sr.shape == (2, 3, 64, 64)
+    if batch_size == 1:
+        assert sr.shape == (channels, IMAGE_SIZE*scale_factor, IMAGE_SIZE*scale_factor)
+    else:
+        assert sr.shape == (batch_size, channels, IMAGE_SIZE*scale_factor, IMAGE_SIZE*scale_factor)
+        
+    assert sr.dtype == torch.torch.uint8
