@@ -49,8 +49,8 @@ class VGG(nn.Module):
             Perceptual VGG loss between sr and hr
 
         """
-        sr = (sr - self.mean) / self.std
-        hr = (hr - self.mean) / self.std
+        sr = (sr - self.vgg_mean) / self.vgg_std
+        hr = (hr - self.vgg_mean) / self.vgg_std
         vgg_sr = self.vgg(sr)
 
         with torch.no_grad():
